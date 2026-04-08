@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DEVONTE CUTZ</title>
+<!-- Firebase Scripts -->
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage-compat.js"></script>
+<!-- Google Sign-In -->
+<meta name="google-signin-client_id" content="345703317013.apps.googleusercontent.com">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --primary: #1a1a1a;
+    --accent: #C8A84B;
+    --accent2: #8B6914;
+    --bg: #F5F0E8;
+    --white: #ffffff;
+    --text: #1a1a1a;
+  }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg);
+    color: var(--text);
+  }
+
+  .header-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 52px;
+    background-color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    border-bottom: 2px solid var(--accent);
+  }
+
+  .header-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 26px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .menu-button {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--accent);
+    color: var(--primary);
+    border: none;
+    border-radius: 0px;
+    cursor: pointer;
+    height: 52px;
+    width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    padding: 0;
+    transition: background 0.2s;
+  }
+
+  .menu-button:hover { background-color: var(--accent2); }
+
+  .menu {
+    position: fixed;
+    top: 52px;
+    left: 0;
+    width: 165px;
+    background-color: #111;
+    color: var(--white);
+    padding: 20px 15px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    height: auto;
+    min-height: 100px;
+    z-index: 999;
+    border-right: 2px solid var(--accent);
+  }
+
+  .menu.show { transform: translateX(0); }
+
+  .menu a {
+    display: block;
+    color: var(--white);
+    margin-bottom: 14px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+  }
+
+  .menu a:hover { color: var(--accent); }
+
+  h1 {
+    text-align: center;
+    font-family: 'Bebas Neue', cursive;
+    color: var(--primary);
+    margin-top: 80px;
+    font-size: 34px;
+    letter-spacing: 2px;
+  }
+
+  form {
+    max-width: 420px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 24px;
+    border-radius: 10px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.1);
+    border-top: 4px solid var(--accent);
+  }
+
+  form label {
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 4px;
+    color: #444;
+  }
+
+  form input,
+  form select,
+  form button {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 14px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+  }
+
+  form input:focus, form select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(200,168,75,0.2);
+  }
+
+  form button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 1px;
+    border-radius: 6px;
+    transition: background 0.2s;
+  }
+
+  form button:hover { background-color: var(--accent2); }
+
+  #bookingMessage {
+    text-align: center;
+    font-weight: bold;
+    color: green;
+    margin-top: 20px;
+  }
+
+  .gallery-category { margin-top: 40px; }
+
+  .gallery-category h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-family: 'Bebas Neue', cursive;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    padding-bottom: 8px;
+  }
+
+  .gallery-category h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+  }
+
+  .gallery-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 10px;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+
+  .gallery-grid img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    height: 230px;
+    object-fit: cover;
+    transition: transform 0.2s;
+  }
+
+  .gallery-grid img:hover { transform: scale(1.02); }
+
+  .content-section { display: none; }
+  .content-section.active { display: block; }
+
+  .menu a.admin-button {
+    background-color: #333;
+    color: var(--accent);
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-weight: bold;
+    display: block;
+    margin: 8px auto 0;
+    cursor: pointer;
+    text-align: center;
+    width: fit-content;
+    border: 1px solid var(--accent);
+    font-size: 13px;
+  }
+
+  .location-button {
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--accent);
+    color: var(--primary);
+    border: none;
+    padding: 0;
+    border-radius: 0px;
+    cursor: pointer;
+    height: 52px;
+    width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .location-button:hover { background-color: var(--accent2); }
+
+  .opening-hours {
+    font-family: 'Barlow', sans-serif;
+    padding: 8px 0;
+    border-top: 1px solid rgba(200,168,75,0.3);
+    border-bottom: 1px solid rgba(200,168,75,0.3);
+  }
+
+  .opening-hours h3 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    color: var(--accent);
+  }
+
+  .opening-hours p {
+    font-size: 12px;
+    margin: 2px 0;
+    color: #ccc;
+  }
+
+  .location-info {
+    font-family: 'Barlow', sans-serif;
+    padding: 8px 0;
+  }
+
+  .location-info h3 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    color: var(--accent);
+  }
+
+  .location-info p {
+    font-size: 12px;
+    margin: 0;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .separator-line {
+    height: 1px;
+    background-color: rgba(200,168,75,0.3);
+    margin: 8px 0;
+  }
+
+  #myBookingsModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+
+  #myBookingsBox {
+    background: #fff;
+    width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    border-radius: 12px;
+    overflow-y: auto;
+    position: relative;
+    padding: 20px;
+    border-top: 4px solid var(--accent);
+  }
+
+  #closeBookings {
+    position: sticky;
+    top: 0;
+    float: right;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10000;
+    color: #999;
+  }
+
+  .book-now-btn {
+    background: linear-gradient(135deg, var(--primary), #333);
+    color: var(--accent);
+    font-weight: 700;
+    padding: 10px 24px;
+    border: 2px solid var(--accent);
+    border-radius: 25px;
+    cursor: pointer;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 16px;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+  }
+
+  .book-now-btn:hover {
+    background: var(--accent);
+    color: var(--primary);
+  }
+
+  /* Sidebar menu action buttons */
+  .menu-action-btn {
+    display: block;
+    text-align: center;
+    font-size: 13px;
+    margin: 8px auto;
+    padding: 8px 10px;
+    background-color: #333;
+    color: var(--accent);
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    width: 85%;
+    font-weight: bold;
+    border: 1px solid var(--accent);
+    letter-spacing: 0.5px;
+  }
+
+  .menu-action-btn:hover { background-color: var(--accent); color: var(--primary); }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header-bar">
+  <button class="menu-button" onclick="toggleMenu()">☰</button>
+  <div class="header-title">✂ DEVONTE CUTZ</div>
+  <a class="location-button" href="https://maps.app.goo.gl/htPbv5Et5uo2x1FWA" target="_blank">📍</a>
+</div>
+
+<!-- Gallery Section -->
+<div class="content-section active" id="gallerySection">
+  <h2 style="text-align:center; margin-top:65px; font-family:'Bebas Neue',cursive; letter-spacing:2px; color:var(--primary); font-size:0;"></h2>
+  <div id="galleryDisplay"></div>
+</div>
+
+<!-- Side Menu -->
+<div class="menu" id="menu">
+  <a onclick="showSection('gallerySection'); closeMenu();">✂ CUTS</a>
+  <a onclick="showSection('bookingSection'); closeMenu();">📆 BOOKING</a>
+  <a onclick="showSection('reviewsSection'); closeMenu();">⭐ REVIEWS</a>
+
+  <div class="opening-hours">
+    <h3>HOURS:</h3>
+    <p>Mon – Sat: 9:00 AM – 6:00 PM</p>
+    <p>Tuesday: Closed</p>
+    <p>Sunday: Closed</p>
+  </div>
+
+  <a class="menu-action-btn" onclick="showUserBookings(); closeMenu();" href="javascript:void(0);">MY BOOKINGS</a>
+  <a onclick="showPaymentInfo(); closeMenu();" class="menu-action-btn" href="javascript:void(0);">PAYMENT INFO</a>
+
+  <div class="separator-line"></div>
+
+  <!-- Social Links -->
+  <div style="display:flex; justify-content:center; gap:28px; margin-top:18px;">
+    <a href="https://www.instagram.com/" style="display:inline-block;" target="_blank">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+        <defs>
+          <linearGradient id="ig" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#ffc107"/>
+            <stop offset="50%" style="stop-color:#e91e63"/>
+            <stop offset="100%" style="stop-color:#673ab7"/>
+          </linearGradient>
+        </defs>
+        <path fill="url(#ig)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+      </svg>
+    </a>
+    <a href="https://www.tiktok.com/" target="_blank" style="display:inline-block;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 448 512">
+        <path fill="#ff0050" d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25v178.72A162.55 162.55 0 1 1 185 188.31v89.89a74.62 74.62 0 1 0 52.23 71.18V0h88a121.18 121.18 0 0 0 1.86 22.17A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14z" transform="translate(3,3)"/>
+        <path fill="#25f4ee" d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25v178.72A162.55 162.55 0 1 1 185 188.31v89.89a74.62 74.62 0 1 0 52.23 71.18V0h88a121.18 121.18 0 0 0 1.86 22.17A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14z" transform="translate(-3,-3)"/>
+        <path fill="#ffffff" d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25v178.72A162.55 162.55 0 1 1 185 188.31v89.89a74.62 74.62 0 1 0 52.23 71.18V0h88a121.18 121.18 0 0 0 1.86 22.17A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14z"/>
+      </svg>
+    </a>
+  </div>
+
+  <div class="separator-line" style="margin-top:18px;"></div>
+
+  <div class="location-info">
+    <h3>LOCATION:</h3>
+    <p>Your Shop Address Here, City, Jamaica</p>
+  </div>
+
+  <div class="separator-line"></div>
+
+  <a onclick="logoutUser(); closeMenu();" style="display:block; text-align:center; margin:10px auto; padding:8px 10px; background-color:#c0392b; color:white; border-radius:6px; cursor:pointer; text-decoration:none; width:85%; font-weight:bold; font-size:13px;">LOGOUT</a>
+  <a class="admin-button" onclick="login(); closeMenu();" style="display:block; text-align:center; margin:8px auto; padding:8px 10px; border-radius:6px; text-decoration:none; width:85%; font-weight:bold; font-size:13px;">ADMIN</a>
+</div>
+
+<!-- Booking Confirmation Modal -->
+<div id="bookingModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background-color:rgba(0,0,0,0.5); justify-content:center; align-items:center; z-index:10000;">
+  <div style="padding:20px; border-radius:12px; max-width:450px; width:90%; max-height:80vh; overflow-y:auto; box-shadow:0 4px 12px rgba(0,0,0,0.2); position:relative;">
+    <h3 id="bookingModalTitle" style="margin:10px 0; color:var(--accent); text-align:center; font-family:'Bebas Neue',cursive; letter-spacing:2px;">Booking Confirmation</h3>
+    <p id="bookingModalContent"></p>
+  </div>
+</div>
+
+<!-- My Bookings Modal -->
+<div id="myBookingsModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background-color:rgba(0,0,0,0.5); justify-content:center; align-items:center; z-index:10000;">
+  <div id="myBookingsBox" style="background:#fff; padding:20px; border-radius:12px; max-width:400px; width:90%; max-height:80vh; overflow-y:auto; box-shadow:0 4px 12px rgba(0,0,0,0.2); position:relative; border-top:4px solid var(--accent);">
+    <button onclick="closeMyBookings()" style="position:sticky; top:0; right:0; float:right; background:#fff; border:none; font-size:24px; cursor:pointer; z-index:10001; color:#999;">✖</button>
+    <h3 style="margin:10px 0; color:var(--primary); text-align:center; font-family:'Bebas Neue',cursive; letter-spacing:2px;">My Last 5 Bookings</h3>
+    <div id="myBookingsContent"></div>
+  </div>
+</div>
+
+<!-- Booking Section -->
+<div class="content-section" id="bookingSection">
+  <h1>BOOK YOUR CUT</h1>
+  <form onsubmit="submitBooking(event)">
+    <label for="name">Name:</label>
+    <input id="name" required type="text" placeholder="Your full name"/>
+
+    <label for="phone">Phone Number:</label>
+    <input id="phone" type="tel" inputmode="numeric" maxlength="14" placeholder="eg... (876) 123-4567" required/>
+
+    <label for="date">Preferred Date:</label>
+    <input id="date" min="" onchange="loadAvailableSlots()" required type="date"/>
+
+    <label for="selectedTime">Available Times:</label>
+    <select id="selectedTime" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:6px; font-family:'Barlow',sans-serif;">
+      <option value="">COMPLETE FORM TO SEE AVAILABLE SLOTS</option>
+    </select>
+
+    <!-- Haircut Services -->
+    <label for="haircutType">Haircut:</label>
+    <select id="haircutType" onchange="showEstimateTime(); loadAvailableSlots();">
+      <option value="NONE">NONE</option>
+      <option value="Regular Cut">Regular Cut — $1,500</option>
+      <option value="Fade">Fade — $2,000</option>
+      <option value="Skin Fade">Skin Fade — $2,500</option>
+      <option value="Shape Up">Shape Up — $1,000</option>
+      <option value="Kids Cut">Kids Cut — $1,200</option>
+    </select>
+
+    <!-- Beard Services -->
+    <label for="beardType">Beard:</label>
+    <select id="beardType" onchange="showEstimateTime(); loadAvailableSlots();">
+      <option value="NONE">NONE</option>
+      <option value="Beard Trim">Beard Trim — $800</option>
+      <option value="Beard Shape Up">Beard Shape Up — $1,200</option>
+      <option value="Full Beard Design">Full Beard Design — $2,000</option>
+      <option value="Hot Towel Shave">Hot Towel Shave — $2,500</option>
+    </select>
+
+    <!-- Combo Services -->
+    <label for="comboType">Combo Services:</label>
+    <select id="comboType" onchange="showEstimateTime(); loadAvailableSlots();">
+      <option value="NONE">NONE</option>
+      <option value="Cut & Beard">Cut & Beard — $3,000</option>
+      <option value="Fade & Beard Design">Fade & Beard Design — $4,000</option>
+    </select>
+
+    <!-- Other Services -->
+    <label for="otherType">Other Services:</label>
+    <select id="otherType" onchange="showEstimateTime(); loadAvailableSlots();">
+      <option value="NONE">NONE</option>
+      <option value="Hair Wash">Hair Wash — $500</option>
+      <option value="Scalp Treatment">Scalp Treatment — $1,500</option>
+      <option value="Kid Package">Kid Package (Cut + Wash) — $2,000</option>
+    </select>
+
+    <p id="estimateTimeMessage" style="color:var(--accent2); font-weight:bold; font-size:14px;"></p>
+
+    <button type="submit">BOOK NOW ✂</button>
+  </form>
+  <p id="bookingMessage"></p>
+</div>
+
+<!-- Reviews Section -->
+<div class="content-section" id="reviewsSection">
+  <h1 style="font-family:'Bebas Neue',cursive; letter-spacing:2px; color:var(--primary);">CLIENT REVIEWS</h1>
+  <div id="reviewPrompt" style="display:none; max-width:500px; margin:20px auto; background-color:#f5f0e8; color:#444; border:1px solid var(--accent); border-radius:6px; padding:15px; text-align:center; font-weight:500;">
+    How was your cut? Leave us a review!
+  </div>
+  <form id="reviewForm" style="max-width:85%; margin:10px auto; text-align:center;">
+    <div style="max-width:50%; margin:0 auto;">
+      <input id="reviewName" placeholder="Your Name" required style="width:100%; margin-bottom:10px; padding:10px; border-radius:6px; border:1px solid #ddd; font-family:'Barlow',sans-serif;" type="text"/>
+    </div>
+    <textarea id="reviewComment" placeholder="Write your review..." required style="width:90%; height:80px; margin-bottom:10px; padding:10px; border-radius:6px; border:1px solid #ddd; font-family:'Barlow',sans-serif; resize:vertical;"></textarea>
+    <div id="starRating" style="font-size:28px; margin-bottom:12px; cursor:pointer; color:#ccc;">
+      <span data-value="1">★</span>
+      <span data-value="2">★</span>
+      <span data-value="3">★</span>
+      <span data-value="4">★</span>
+      <span data-value="5">★</span>
+    </div>
+    <button style="background-color:var(--primary); color:var(--accent); border:none; padding:10px 24px; border-radius:6px; cursor:pointer; font-weight:700; font-family:'Barlow',sans-serif; letter-spacing:0.5px;" type="submit">SUBMIT REVIEW</button>
+  </form>
+  <p id="reviewSubmitMsg" style="text-align:center; color:green;"></p>
+  <div id="reviewsContainer" style="max-width:600px; margin:20px auto; padding:0 15px;"></div>
+</div>
+
+<!-- Admin Login Modal -->
+<div id="adminLoginModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background-color:rgba(0,0,0,0.65); justify-content:center; align-items:center; z-index:10000;">
+  <div style="background:white; padding:30px 24px; border-radius:14px; text-align:center; max-width:320px; width:90%; box-shadow:0 8px 30px rgba(0,0,0,0.3); position:relative; border-top:4px solid var(--accent);">
+    <span onclick="closeAdminModal()" style="position:absolute; top:10px; right:14px; font-size:22px; cursor:pointer; color:#aaa; line-height:1;">×</span>
+    <div style="font-size:36px; margin-bottom:8px;">✂</div>
+    <h3 style="margin:0 0 6px; color:var(--primary); font-family:'Bebas Neue',cursive; letter-spacing:2px; font-size:22px;">ADMIN ACCESS</h3>
+    <p style="font-size:13px; color:#888; margin:0 0 22px;">Sign in with the authorised Google account to continue.</p>
+    <button onclick="adminGoogleSignIn()" style="
+      display:flex; align-items:center; justify-content:center; gap:10px;
+      width:100%; padding:12px 16px;
+      background:#fff; color:#444;
+      border:1px solid #ddd; border-radius:8px;
+      cursor:pointer; font-family:'Barlow',sans-serif;
+      font-size:15px; font-weight:600;
+      box-shadow:0 1px 4px rgba(0,0,0,0.1);
+      transition:box-shadow 0.2s; margin-bottom:12px;
+    " onmouseover="this.style.boxShadow='0 3px 10px rgba(0,0,0,0.15)'" onmouseout="this.style.boxShadow='0 1px 4px rgba(0,0,0,0.1)'">
+      <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.35-8.16 2.35-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+      Sign in with Google
+    </button>
+    <p id="adminLoginMsg" style="color:red; font-size:13px; margin:0; display:none;"></p>
+    <button onclick="closeAdminModal()" style="background:none; border:none; color:#aaa; font-size:13px; cursor:pointer; margin-top:10px; padding:0; font-family:'Barlow',sans-serif;">Cancel</button>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script>
+  let currentUser = null;
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCT0aEche1SGWjS_pEn0MmLQH6OGdZ07cU",
+    authDomain: "devonte-cutz.firebaseapp.com",
+    projectId: "devonte-cutz",
+    storageBucket: "devonte-cutz.firebasestorage.app",
+    messagingSenderId: "345703317013",
+    appId: "1:345703317013:web:8b167d90841df86590d81c"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+  const storage = firebase.storage();
+
+  firebase.auth().onAuthStateChanged(user => {
+    currentUser = user || null;
+    loadReviews(currentUser);
+  });
+
+  // ========== AUTH ==========
+  // AUTHORISED ADMIN UID — set this to the Google account UID of your admin
+  // Find it in Firebase Console → Authentication → Users after first login
+  const ADMIN_UID = "Vj3a2XPtWTamBVFi86OP1oZJMi63";
+
+  function login() {
+    document.getElementById('adminLoginModal').style.display = 'flex';
+  }
+
+  function closeAdminModal() {
+    document.getElementById('adminLoginModal').style.display = 'none';
+    document.getElementById('adminLoginMsg').style.display = 'none';
+  }
+
+  function adminGoogleSignIn() {
+    const msg = document.getElementById('adminLoginMsg');
+    msg.style.display = 'none';
+
+    const provider = new firebase.auth.GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: 'select_account' });
+
+    firebase.auth().signInWithPopup(provider)
+      .then((result) => {
+        const user = result.user;
+        // Check UID matches the authorised admin
+        if (user.uid !== ADMIN_UID) {
+          // Not the admin — sign them out immediately
+          firebase.auth().signOut();
+          msg.textContent = "Access denied. This Google account is not authorised as admin.";
+          msg.style.display = "block";
+          return;
+        }
+        closeAdminModal();
+        window.location.href = 'dashboard.html';
+      })
+      .catch((error) => {
+        if (error.code === 'auth/popup-closed-by-user') return;
+        msg.textContent = "Sign-in failed: " + error.message;
+        msg.style.display = "block";
+      });
+  }
+
+  function logoutUser() {
+    firebase.auth().signOut()
+      .then(() => { window.location.href = 'login.html'; })
+      .catch(error => { alert('Logout failed: ' + error.message); });
+  }
+
+  // ========== MENU ==========
+  function toggleMenu() {
+    const menu = document.getElementById("menu");
+    const button = document.querySelector(".menu-button");
+
+    if (menu.classList.contains("show")) {
+      closeMenu();
+    } else {
+      menu.classList.add("show");
+      document.addEventListener("click", outsideClickHandler);
+    }
+
+    function outsideClickHandler(event) {
+      if (!menu.contains(event.target) && !button.contains(event.target)) {
+        closeMenu();
+        document.removeEventListener("click", outsideClickHandler);
+      }
+    }
+  }
+
+  function closeMenu() {
+    document.getElementById("menu").classList.remove("show");
+  }
+
+  function showSection(sectionId) {
+    document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+    document.getElementById(sectionId).classList.add('active');
+
+    if (sectionId === 'gallerySection') loadGallery('galleryDisplay');
+    else if (sectionId === 'reviewsSection') loadReviews(currentUser);
+  }
+
+  // ========== GALLERY ==========
+  function loadGallery(containerId) {
+    const galleryContainer = document.getElementById(containerId);
+    galleryContainer.innerHTML = '';
+
+    db.collection('gallery').onSnapshot((querySnapshot) => {
+      galleryContainer.innerHTML = '';
+      const categories = {};
+
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const imageUrl = data.url;
+        const category = data.category || 'Uncategorized';
+
+        if (!categories[category]) categories[category] = [];
+        categories[category].push(imageUrl);
+      });
+
+      if (Object.keys(categories).length === 0) {
+        galleryContainer.innerHTML = '<p style="text-align:center; margin-top:60px; color:#888; font-size:16px;">No cuts in the gallery yet. Check back soon!</p>';
+        return;
+      }
+
+      for (const category in categories) {
+        galleryContainer.innerHTML += `
+          <div class="gallery-category">
+            <h3>${category}</h3>
+            <div class="gallery-wrapper">
+              <div class="gallery-grid" id="gallery-${category.replace(/\s+/g,'-')}"></div>
+            </div>
+            <div style="text-align:center; margin-top:10px; margin-bottom:10px;">
+              <button onclick="showSection('bookingSection')" class="book-now-btn">BOOK A CUT NOW</button>
+            </div>
+          </div>
+        `;
+
+        const categoryContainer = document.getElementById(`gallery-${category.replace(/\s+/g,'-')}`);
+        categories[category].forEach((imageUrl) => {
+          categoryContainer.innerHTML += `
+            <div><img src="${imageUrl}" alt="Cut" style="margin-bottom:10px;"></div>
+          `;
+        });
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    showSection('gallerySection');
+    loadGallery('galleryDisplay');
+  });
+
+  // ========== BUSINESS HOURS ==========
+  const businessHours = {
+    'Monday': { open: '9:00 AM', close: '6:00 PM' },
+    'Tuesday': null,
+    'Wednesday': { open: '9:00 AM', close: '6:00 PM' },
+    'Thursday': { open: '9:00 AM', close: '6:00 PM' },
+    'Friday': { open: '9:00 AM', close: '6:00 PM' },
+    'Saturday': { open: '9:00 AM', close: '6:00 PM' },
+    'Sunday': null
+  };
+
+  // ========== SERVICE DURATIONS ==========
+  const serviceDurations = {
+    "Regular Cut": 30,
+    "Fade": 45,
+    "Skin Fade": 50,
+    "Shape Up": 20,
+    "Kids Cut": 25,
+    "Beard Trim": 20,
+    "Beard Shape Up": 25,
+    "Full Beard Design": 35,
+    "Hot Towel Shave": 40,
+    "Cut & Beard": 60,
+    "Fade & Beard Design": 75,
+    "Hair Wash": 15,
+    "Scalp Treatment": 30,
+    "Kid Package": 40
+  };
+
+  function getSelectedServices() {
+    const haircut = document.getElementById('haircutType')?.value || "NONE";
+    const beard = document.getElementById('beardType')?.value || "NONE";
+    const combo = document.getElementById('comboType')?.value || "NONE";
+    const other = document.getElementById('otherType')?.value || "NONE";
+
+    let services = [];
+    [haircut, beard, combo, other].forEach(s => { if (s && s !== 'NONE') services.push(s); });
+    return services.length > 0 ? services.join(', ') : 'No services selected';
+  }
+
+  function getSelectedServiceDuration() {
+    const haircut = document.getElementById('haircutType').value;
+    const beard = document.getElementById('beardType').value;
+    const combo = document.getElementById('comboType').value;
+    const other = document.getElementById('otherType').value;
+
+    let totalDuration = 0;
+    [haircut, beard, combo, other].forEach(s => { if (s && s !== 'NONE') totalDuration += serviceDurations[s] || 0; });
+    return totalDuration || 30;
+  }
+
+  function showEstimateTime() {
+    const haircut = document.getElementById('haircutType').value;
+    const beard = document.getElementById('beardType').value;
+    const combo = document.getElementById('comboType').value;
+    const other = document.getElementById('otherType').value;
+    const msg = document.getElementById('estimateTimeMessage');
+
+    if ([haircut, beard, combo, other].every(s => s === 'NONE')) { msg.innerHTML = ''; return; }
+
+    let total = 0;
+    [haircut, beard, combo, other].forEach(s => { if (s && s !== 'NONE') total += serviceDurations[s] || 0; });
+
+    if (total > 0) {
+      const h = Math.floor(total / 60);
+      const m = total % 60;
+      let str = '';
+      if (h) str += `${h} hour${h > 1 ? 's' : ''}`;
+      if (m) { if (str) str += ' and '; str += `${m} minute${m > 1 ? 's' : ''}`; }
+      msg.innerHTML = `⏱ Estimated Duration: ~${str}`;
+    }
+  }
+
+  // ========== TIME UTILS ==========
+  function convertToMinutes(timeStr) {
+    if (!timeStr) return 0;
+    let [time, period] = timeStr.split(' ');
+    let [hours, minutes] = time.split(':').map(Number);
+    if (period && period.toUpperCase() === 'PM' && hours !== 12) hours += 12;
+    if (period && period.toUpperCase() === 'AM' && hours === 12) hours = 0;
+    return (hours * 60) + minutes;
+  }
+
+  function normalizeTimeStr(timeStr) {
+    if (!timeStr) return null;
+    if (timeStr.includes("AM") || timeStr.includes("PM")) return timeStr;
+    let [hours, minutes] = timeStr.split(":").map(Number);
+    const period = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12 || 12;
+    return `${hours}:${minutes.toString().padStart(2, "0")} ${period}`;
+  }
+
+  // ========== SLOT LOADING ==========
+  async function loadAvailableSlots() {
+    const date = document.getElementById('date').value;
+    const haircut = document.getElementById('haircutType')?.value || "NONE";
+    const beard = document.getElementById('beardType')?.value || "NONE";
+    const combo = document.getElementById('comboType')?.value || "NONE";
+    const other = document.getElementById('otherType')?.value || "NONE";
+
+    const timeSelect = document.getElementById('selectedTime');
+    timeSelect.innerHTML = "<option value=''>-- Select a time --</option>";
+
+    const hasService = [haircut, beard, combo, other].some(s => s !== "NONE");
+    if (!date || !hasService) {
+      timeSelect.innerHTML = "<option value=''>COMPLETE FORM TO SEE AVAILABLE SLOTS</option>";
+      return;
+    }
+
+    const duration = getSelectedServiceDuration();
+    const dayName = new Date(date + "T00:00:00").toLocaleDateString('en-US', { weekday: 'long' });
+    const business = businessHours[dayName];
+
+    if (!business) {
+      timeSelect.innerHTML = "<option value=''>Closed this day</option>";
+      return;
+    }
+
+    const openMinutes = convertToMinutes(business.open);
+    const closeMinutes = convertToMinutes(business.close);
+
+    try {
+      const snapshot = await db.collection("bookings").where("date", "==", date).get();
+      const bookings = snapshot.docs.map(doc => {
+        const bookedTime = convertToMinutes(normalizeTimeStr(doc.data().time));
+        const bookedDuration = doc.data().duration || 30;
+        return { start: bookedTime, end: bookedTime + bookedDuration };
+      });
+
+      const unavailableSnapshot = await db.collection("unavailableDays").where("date", "==", date).get();
+      let unavailableRanges = [];
+      unavailableSnapshot.forEach(doc => {
+        const data = doc.data();
+        if (data.allDay) {
+          unavailableRanges.push({ start: openMinutes, end: closeMinutes });
+        } else {
+          const start = convertToMinutes(normalizeTimeStr(data.startTime));
+          const end = convertToMinutes(normalizeTimeStr(data.endTime));
+          if (!isNaN(start) && !isNaN(end) && end > start) unavailableRanges.push({ start, end });
+        }
+      });
+
+      for (let t = openMinutes; t <= closeMinutes; t += 5) {
+        const end = t + duration;
+
+        const now = new Date();
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        const selectedDate = new Date(date + "T00:00:00");
+        if (selectedDate.getTime() === today.getTime()) {
+          const currentMinutes = now.getHours() * 60 + now.getMinutes();
+          if (t <= currentMinutes) continue;
+        }
+
+        let conflict = bookings.some(b => !(end <= b.start || t >= b.end)) ||
+                       unavailableRanges.some(r => !(end <= r.start || t >= r.end));
+
+        if (!conflict) {
+          const hours = Math.floor(t / 60);
+          const minutes = t % 60;
+          const ampm = hours >= 12 ? "PM" : "AM";
+          const displayHours = ((hours + 11) % 12 + 1);
+          const displayTime = `${displayHours}:${minutes.toString().padStart(2, "0")} ${ampm}`;
+          let option = document.createElement("option");
+          option.value = displayTime;
+          option.textContent = displayTime;
+          timeSelect.appendChild(option);
+        }
+      }
+
+      if (timeSelect.options.length === 1) {
+        let option = document.createElement("option");
+        option.value = "";
+        option.textContent = "No available slots";
+        timeSelect.appendChild(option);
+      }
+    } catch (err) {
+      console.error("Error loading slots:", err);
+      timeSelect.innerHTML = "<option value=''>Error loading slots</option>";
+    }
+  }
+
+  // ========== BOOKING ==========
+  function generateBookingNumber(name) {
+    const initials = name.trim().substring(0, 2).toUpperCase();
+    const digits = Math.floor(1000 + Math.random() * 9000);
+    return initials + digits;
+  }
+
+  function validateTimeSlot(date, selectedTime) {
+    const dayName = new Date(date + 'T00:00:00').toLocaleDateString('en-US', { weekday: 'long' });
+    const business = businessHours[dayName];
+
+    if (!business) {
+      alert(`We are closed on ${dayName}s. Please select another day.`);
+      return Promise.resolve(false);
+    }
+
+    const selectedMinutes = convertToMinutes(selectedTime);
+    const openMinutes = convertToMinutes(business.open);
+    const closeMinutes = convertToMinutes(business.close);
+
+    if (selectedMinutes < openMinutes || selectedMinutes >= closeMinutes) {
+      alert(`Please choose a time within business hours (${business.open} – ${business.close})`);
+      return Promise.resolve(false);
+    }
+
+    return db.collection('unavailableDays').where('date', '==', date).get()
+      .then((unavailableSnapshot) => {
+        let isUnavailable = false;
+        unavailableSnapshot.forEach((doc) => {
+          const data = doc.data();
+          if (data.allDay) {
+            isUnavailable = true;
+          } else {
+            const startMinutes = convertToMinutes(normalizeTimeStr(data.startTime));
+            const endMinutes = convertToMinutes(normalizeTimeStr(data.endTime));
+            if (selectedMinutes >= startMinutes && selectedMinutes <= endMinutes) isUnavailable = true;
+          }
+        });
+
+        if (isUnavailable) return false;
+
+        return db.collection('bookings').where('date', '==', date).get()
+          .then((querySnapshot) => {
+            const newServiceDuration = getSelectedServiceDuration();
+            const newServiceEndTime = selectedMinutes + newServiceDuration;
+
+            for (let doc of querySnapshot.docs) {
+              let bookedTime = doc.data().time.trim().replace(/\s+/g, ' ');
+              let bookedMinutes = convertToMinutes(bookedTime);
+              let bookedDuration = doc.data().duration || 30;
+              let bookedEndTime = bookedMinutes + bookedDuration;
+
+              if (selectedMinutes < bookedEndTime && bookedMinutes < newServiceEndTime) return false;
+            }
+            return true;
+          });
+      })
+      .catch(error => {
+        console.error("Error validating time slot:", error);
+        return false;
+      });
+  }
+
+  function submitBooking(event) {
+    event.preventDefault();
+
+    const user = firebase.auth().currentUser;
+    if (!user) {
+      if (confirm("You must be logged in to book an appointment. Click OK to log in.")) {
+        window.location.href = 'login.html';
+      }
+      return;
+    }
+
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const date = document.getElementById('date').value;
+    const time = document.getElementById('selectedTime').value;
+    const services = getSelectedServices();
+
+    if (!name || !phone || !date || !time) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+
+    if (services === 'No services selected') {
+      alert('Please select at least one service before booking.');
+      return;
+    }
+
+    const bookingNumber = generateBookingNumber(name);
+    const duration = getSelectedServiceDuration();
+
+    validateTimeSlot(date, time)
+      .then((isAvailable) => {
+        if (!isAvailable) {
+          alert('This time is not available. Please choose another time.');
+          return Promise.reject('Time slot not available');
+        }
+
+        return db.collection('bookings').add({
+          uid: user.uid,
+          bookingNumber,
+          name,
+          phone,
+          date: date,
+          time,
+          service: services,
+          duration,
+          deposit: "No",
+          timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+      })
+      .then((docRef) => {
+        if (!docRef) return;
+
+        const [year, month, day] = date.split("-");
+        const formattedDate = new Date(year, month - 1, day).toLocaleDateString("en-US", {
+          year: "numeric", month: "long", day: "numeric"
+        });
+
+        const message = `✂️ NEW BOOKING\n\n🔢 Booking #: ${bookingNumber}\n👤 Name: ${name}\n📞 Phone: ${phone}\n📍 Date: ${formattedDate}\n⏰ Time: ${time}\n💈 Service: ${services}`;
+
+        const telegramBotToken = "8320926833:AAHmcN6foSjjN-7WXYjs_J50J0CDZ0QwFbA";
+        const telegramChatId = "8280486738";
+
+        return fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ chat_id: telegramChatId, text: message, parse_mode: "HTML" })
+        });
+      })
+      .then((response) => {
+        if (!response) return;
+
+        document.querySelector("#bookingSection form").reset();
+        document.getElementById("estimateTimeMessage").innerHTML = "";
+        document.getElementById("selectedTime").innerHTML = "<option value=''>Pick date & service first</option>";
+        document.querySelector("#bookingModal h3").style.display = "none";
+        document.querySelector("#bookingModal p").innerHTML = `
+          <div style="text-align:center; padding:20px; font-family:'Barlow',sans-serif; color:#333; max-width:420px; margin:0 auto; background:white; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.2); border-top:4px solid var(--accent);">
+            <div style="width:70px; height:70px; border-radius:50%; background:#28a745; display:flex; align-items:center; justify-content:center; margin:0 auto 15px;">
+              <span style="font-size:38px; color:white;">✔</span>
+            </div>
+            <h2 style="margin:0 0 12px; font-size:22px; font-weight:bold; font-family:'Bebas Neue',cursive; letter-spacing:2px;">BOOKING CONFIRMED</h2>
+            <p style="font-size:16px; margin:0 0 12px;">Your Booking #: <strong>${bookingNumber}</strong></p>
+            <hr style="margin:15px 0; border:0; height:1px; background:#ddd;">
+            <p style="font-size:15px; margin:10px 0;">Thanks for booking with Next Level Cuts! We'll see you soon. 💈</p>
+            <hr style="margin:15px 0; border:0; height:1px; background:#ddd;">
+            <p style="font-size:13px; color:#555; margin:15px 0; text-align:left; line-height:1.5;">ℹ️ For online payment, tap the <b>menu icon</b> (top left) and view <b>PAYMENT INFO</b>. Use your booking number as the reference.</p>
+            <button onclick="closeBookingModal()" style="margin-top:15px; padding:10px 25px; background:var(--primary); color:var(--accent); border:none; border-radius:6px; font-size:15px; cursor:pointer; font-weight:bold; font-family:'Barlow',sans-serif;">OK</button>
+          </div>
+        `;
+        document.getElementById('bookingModal').style.display = 'flex';
+      })
+      .catch((err) => {
+        if (err === 'Time slot not available') return;
+        if (err.code === 'permission-denied') alert("Permission denied. Please contact support.");
+        else if (err.code === 'unavailable') alert("Service temporarily unavailable. Please try again.");
+        else if (err.code === 'network-request-failed') alert("Network error. Check your connection.");
+        else alert("Failed to save booking. Please try again.");
+      });
+  }
+
+  function closeBookingModal() {
+    document.getElementById('bookingModal').style.display = 'none';
+  }
+
+  // ========== PAYMENT INFO ==========
+  function showPaymentInfo() {
+    Swal.fire({
+      title: "<div style='font-family:Bebas Neue,cursive;letter-spacing:2px;font-size:22px;'>BANK TRANSFER INFO</div>",
+      html: `
+        <div style="text-align:left; font-size:16px; line-height:1.8; color:white; font-family:Barlow,sans-serif;">
+          <p><b>Bank Name:</b> NCB</p>
+          <p><b>Account Name:</b> [Your Name Here]</p>
+          <p><b>Account Number:</b> [Your Account]</p>
+          <p><b>Branch:</b> [Your Branch], Jamaica</p>
+          <p><b>Note:</b> Use your Booking # as the payment reference.</p>
+        </div>
+      `,
+      width: 500,
+      confirmButtonText: "CLOSE",
+      background: "#1a1a1a",
+      color: "white",
+      confirmButtonColor: "#C8A84B",
+      customClass: { popup: "swal2-rounded" }
+    });
+  }
+
+  // ========== REVIEWS ==========
+  let selectedRating = 0;
+
+  document.querySelectorAll('#starRating span').forEach(star => {
+    star.addEventListener('click', () => {
+      selectedRating = parseInt(star.getAttribute('data-value'));
+      document.querySelectorAll('#starRating span').forEach(s => {
+        s.style.color = parseInt(s.getAttribute('data-value')) <= selectedRating ? '#f39c12' : '#ccc';
+      });
+    });
+  });
+
+  document.getElementById('reviewForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const user = firebase.auth().currentUser;
+    if (!user) {
+      if (confirm("You must be logged in to submit a review. Click OK to log in.")) {
+        window.location.href = 'login.html';
+      }
+      return;
+    }
+
+    const name = document.getElementById('reviewName').value.trim();
+    const comment = document.getElementById('reviewComment').value.trim();
+    const msg = document.getElementById('reviewSubmitMsg');
+
+    if (!name || !comment || selectedRating === 0) {
+      msg.style.color = "red";
+      msg.textContent = "Please fill all fields and select a star rating.";
+      return;
+    }
+
+    try {
+      await db.collection('reviews').add({ name, comment, rating: selectedRating, timestamp: firebase.firestore.FieldValue.serverTimestamp(), uid: user.uid });
+      msg.style.color = "green";
+      msg.textContent = "Thank you for your review!";
+      document.getElementById('reviewForm').reset();
+      selectedRating = 0;
+      document.querySelectorAll('#starRating span').forEach(s => s.style.color = '#ccc');
+    } catch (error) {
+      console.error("Error submitting review:", error);
+      msg.style.color = "red";
+      msg.textContent = "Error submitting review.";
+    }
+  });
+
+  function formatReviewTime(timestamp) {
+    if (!timestamp || !timestamp.toDate) return '';
+    const now = new Date();
+    const reviewDate = timestamp.toDate();
+    const diffMs = now - reviewDate;
+    const diffSec = Math.floor(diffMs / 1000);
+    const diffMin = Math.floor(diffSec / 60);
+    const diffHours = Math.floor(diffMin / 60);
+    const diffDays = Math.floor(diffHours / 24);
+    const diffWeeks = Math.floor(diffDays / 7);
+    const diffMonths = Math.floor(diffDays / 30);
+    const diffYears = Math.floor(diffDays / 365);
+    if (diffSec < 60) return "Just now";
+    if (diffMin < 60) return `${diffMin} min${diffMin > 1 ? "s" : ""} ago`;
+    if (diffHours < 24) return `${diffHours} hr${diffHours > 1 ? "s" : ""} ago`;
+    if (diffDays < 7) return `${diffDays} day${diffDays > 1 ? "s" : ""} ago`;
+    if (diffWeeks < 5) return `${diffWeeks} week${diffWeeks > 1 ? "s" : ""} ago`;
+    if (diffMonths < 12) return `${diffMonths} month${diffMonths > 1 ? "s" : ""} ago`;
+    return `${diffYears} year${diffYears > 1 ? "s" : ""} ago`;
+  }
+
+  function loadReviews(user) {
+    const container = document.getElementById('reviewsContainer');
+    container.innerHTML = "<p style='text-align:center;color:#888;'>Loading reviews...</p>";
+
+    db.collection('reviews').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
+      if (snapshot.empty) { container.innerHTML = "<p style='text-align:center;color:#888;'>No reviews yet.</p>"; return; }
+      container.innerHTML = '';
+      snapshot.forEach(doc => {
+        const d = doc.data();
+        const isOwner = user && d.uid === user.uid;
+        const dateString = formatReviewTime(d.timestamp);
+        let stars = '';
+        for (let i = 1; i <= 5; i++) {
+          stars += `<span style="color:${i <= d.rating ? '#f39c12' : '#ccc'};">★</span>`;
+        }
+        container.innerHTML += `
+          <div style="background:#fff; border:1px solid #eee; padding:14px; margin-bottom:12px; border-radius:8px; box-shadow:0 1px 4px rgba(0,0,0,0.06); border-left:4px solid var(--accent);">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <strong style="font-size:15px;">${d.name}</strong>
+              <small style="color:#aaa; font-style:italic;">${dateString}</small>
+            </div>
+            <div style="margin:4px 0; font-size:18px;">${stars}</div>
+            <div style="font-size:14px; color:#555; line-height:1.5;">${d.comment}</div>
+            ${isOwner ? `<button onclick="deleteReview('${doc.id}')" style="color:red; cursor:pointer; background:none; border:none; font-size:13px; padding:0; margin-top:6px;">Delete</button>` : ''}
+          </div>
+        `;
+      });
+    });
+  }
+
+  function deleteReview(docId) {
+    const user = firebase.auth().currentUser;
+    if (!user) { window.location.href = 'login.html'; return; }
+    db.collection('reviews').doc(docId).get().then(doc => {
+      if (!doc.exists) { alert("Review not found."); return; }
+      if (doc.data().uid !== user.uid) { alert("You can only delete your own reviews."); return; }
+      db.collection('reviews').doc(docId).delete()
+        .then(() => alert("Review deleted."))
+        .catch(error => alert("Failed to delete: " + error.message));
+    }).catch(error => alert("Error: " + error.message));
+  }
+
+  // ========== MY BOOKINGS ==========
+  function showUserBookings() {
+    const user = firebase.auth().currentUser;
+    if (!user) {
+      if (confirm("Please log in to view your bookings. Click OK to log in.")) window.location.href = 'login.html';
+      return;
+    }
+
+    document.getElementById('bookingModal').style.display = 'none';
+    document.getElementById('adminLoginModal').style.display = 'none';
+    document.getElementById('myBookingsContent').innerHTML = '<p style="text-align:center; color:#888;">Loading your bookings...</p>';
+    document.getElementById('myBookingsModal').style.display = 'flex';
+
+    const unsubscribe = db.collection('bookings').where("uid", "==", user.uid).onSnapshot(snapshot => {
+      let bookings = [];
+      snapshot.forEach(doc => bookings.push({ id: doc.id, ...doc.data() }));
+
+      bookings.sort((a, b) => {
+        let dateA = typeof a.date === 'string' ? new Date(a.date) : new Date(0);
+        let dateB = typeof b.date === 'string' ? new Date(b.date) : new Date(0);
+        return dateB - dateA;
+      });
+
+      bookings = bookings.slice(0, 5);
+      let bookingsHTML = "";
+
+      if (bookings.length === 0) {
+        bookingsHTML = `
+          <div style="text-align:center; padding:20px;">
+            <p style="color:#666; font-size:16px;">You don't have any bookings yet.</p>
+            <button onclick="closeMyBookings(); showSection('bookingSection');" style="background-color:var(--primary); color:var(--accent); padding:10px 20px; border:none; border-radius:6px; cursor:pointer; margin-top:10px; font-family:'Barlow',sans-serif; font-weight:bold;">
+              Book Your First Cut
+            </button>
+          </div>
+        `;
+      } else {
+        bookings.forEach(b => {
+          let bookingDate = "Unknown Date";
+          try {
+            if (typeof b.date === "string") {
+              const [y, m, d] = b.date.split("-").map(Number);
+              if (y && m && d) bookingDate = new Date(y, m - 1, d).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+            }
+          } catch (err) {}
+
+          let cleanService = b.service || "";
+          const depositStatus = b.deposit === "Made" || b.deposit === "Yes";
+
+          bookingsHTML += `
+            <div style="border:1px solid #ddd; border-radius:10px; padding:14px; margin-bottom:14px; background:white; box-shadow:0 2px 5px rgba(0,0,0,0.08); border-left:4px solid var(--accent);">
+              <h3 style="margin-top:0; color:var(--primary); font-size:17px; font-family:'Bebas Neue',cursive; letter-spacing:1px;">Booking #: ${b.bookingNumber || "N/A"}</h3>
+              <p style="margin:4px 0; font-size:14px;"><strong>👤 Name:</strong> ${b.name || "N/A"}</p>
+              <p style="margin:4px 0; font-size:14px;"><strong>📞 Phone:</strong> ${b.phone || "N/A"}</p>
+              <p style="margin:4px 0; font-size:14px;"><strong>📅 Date:</strong> ${bookingDate}</p>
+              <p style="margin:4px 0; font-size:14px;"><strong>⏰ Time:</strong> ${b.time || "N/A"}</p>
+              ${cleanService ? `<p style="margin:4px 0; font-size:14px;"><strong>✂ Services:</strong> ${cleanService}</p>` : ''}
+              <p style="margin:4px 0; font-size:14px;"><strong>💵 Payment:</strong> <span style="color:${depositStatus ? 'green' : 'red'}; font-weight:bold;">${depositStatus ? 'Confirmed' : 'Pending'}</span></p>
+            </div>
+          `;
+        });
+      }
+
+      document.getElementById('myBookingsContent').innerHTML = bookingsHTML;
+    }, error => {
+      document.getElementById('myBookingsContent').innerHTML = `<div style="text-align:center; padding:20px;"><p style="color:red;">Error loading bookings.</p><button onclick="closeMyBookings();" style="background:#ccc; color:#333; padding:8px 16px; border:none; border-radius:6px; cursor:pointer;">Close</button></div>`;
+    });
+
+    window.bookingsUnsubscribe = unsubscribe;
+  }
+
+  function closeMyBookings() {
+    document.getElementById('myBookingsModal').style.display = 'none';
+    if (window.bookingsUnsubscribe) {
+      window.bookingsUnsubscribe();
+      window.bookingsUnsubscribe = null;
+    }
+  }
+
+  // ========== PHONE FORMAT ==========
+  document.addEventListener("DOMContentLoaded", function () {
+    const phoneInput = document.getElementById("phone");
+    if (phoneInput) {
+      phoneInput.addEventListener("input", function(e) {
+        let input = e.target.value.replace(/\D/g, "");
+        if (input.length > 10) input = input.substring(0, 10);
+        let formatted = input;
+        if (input.length > 6) formatted = `(${input.substring(0,3)}) ${input.substring(3,6)}-${input.substring(6)}`;
+        else if (input.length > 3) formatted = `(${input.substring(0,3)}) ${input.substring(3)}`;
+        else if (input.length > 0) formatted = `(${input}`;
+        e.target.value = formatted;
+      });
+    }
+
+    const dateInput = document.getElementById("date");
+    if (dateInput) {
+      const today = new Date().toISOString().split("T")[0];
+      dateInput.setAttribute("min", today);
+    }
+  });
+
+</script>
+</body>
+</html>
