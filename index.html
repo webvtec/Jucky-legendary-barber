@@ -3,7 +3,60 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>PURGE CUTZ</title>
+<title>Jerome Celebrity Kutt – Book Your Cut Today</title>
+<!-- Crawling & Indexing -->
+<meta name="robots" content="index, follow, max-image-preview:large">
+<!-- SEO & Description -->
+<meta name="description" content="Jerome Celebrity Kutt – Professional barber offering precision fades, skin fades, beard work, kids cuts and special designs. Book your appointment today.">
+<meta name="keywords" content="Jerome Celebrity Kutt, Jerome barber, Jerome Celebrity Kutt Jamaica, Jerome barber Kingston, celebrity barber Jamaica, best barber Kingston Jamaica, barber shop Kingston, barber near me Kingston, men haircut Jamaica, fade haircut Jamaica, skin fade Kingston, taper fade Jamaica, bald fade Jamaica, lineup Jamaica, shape up Kingston, edge up Jamaica, beard trim Jamaica, beard grooming Kingston, kids haircut Jamaica, boys fade Kingston, book barber Jamaica, barber appointment Kingston, hair design Jamaica, waves haircut Jamaica, barber New Kingston, barber Half Way Tree, barber Liguanea, KGN barber, walk in barber Jamaica, jeromecelebritykutts">
+<meta name="author" content="Jerome Celebrity Kutt">
+<link rel="canonical" href="https://jeromecelebritykutt.com/">
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+<!-- Favicon -->
+<link rel="icon" type="image/png" sizes="32x32" href="https://res.cloudinary.com/dqqr9udcs/image/upload/v1775968065/JEROME_CELEBRITY_KUTT_LOGO_o8seax.png">
+<link rel="icon" type="https://res.cloudinary.com/dqqr9udcs/image/upload/v1775968065/JEROME_CELEBRITY_KUTT_LOGO_o8seax.png">
+<link rel="shortcut icon" type="https://res.cloudinary.com/dqqr9udcs/image/upload/v1775968065/JEROME_CELEBRITY_KUTT_LOGO_o8seax.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://res.cloudinary.com/dqqr9udcs/image/upload/v1775968065/JEROME_CELEBRITY_KUTT_LOGO_o8seax.png">
+
+<!-- Open Graph (Google, Facebook, WhatsApp previews) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jeromecelebritykutt.com">
+<meta property="og:title" content="Jerome Celebrity Kutt – Book Your Cut Today">
+<meta property="og:description" content="Jerome Celebrity Kutt – Precision fades, skin fades, beard work, kids cuts and special designs. Book your appointment online now.">
+<meta property="og:image" content="https://res.cloudinary.com/dqqr9udcs/image/upload/v1775968065/JEROME_CELEBRITY_KUTT_LOGO_o8seax.pngg">
+<meta property="og:site_name" content="Jerome Celebrity Kutt">
+<!-- Twitter / X Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://jeromecelebritykutt.com">
+<meta name="twitter:title" content="Jerome Celebrity Kutt – Book Your Cut Today">
+<meta name="twitter:description" content="Jerome Celebrity Kutt – Precision fades, skin fades, beard work, kids cuts and special designs. Book your appointment online now.">
+<meta name="twitter:image" content="https://res.cloudinary.com/dqqr9udcs/image/upload/v1775968065/JEROME_CELEBRITY_KUTT_LOGO_o8seax.png">
+<!-- Structured Data (JSON-LD) for Google -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HairSalon",
+  "name": "Jerome Celebrity Kutt",
+  "url": "https://jeromecelebritykutt.com",
+  "description": "Professional barber offering precision fades, skin fades, beard work, kids cuts and special designs in Jamaica.",
+  "image": "https://res.cloudinary.com/dqqr9udcs/image/upload/v1775968065/JEROME_CELEBRITY_KUTT_LOGO_o8seax.png",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://res.cloudinary.com/dqqr9udcs/image/upload/v1775968065/JEROME_CELEBRITY_KUTT_LOGO_o8seax.pngg",
+    "width": 512,
+    "height": 512
+  },
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Shop 24, Pavilion Mall",
+    "addressLocality": "Half Way Tree",
+    "addressCountry": "JM"
+  },
+  "sameAs": []
+}
+</script>
+
 <!-- Firebase Scripts -->
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
@@ -18,9 +71,9 @@
     --primary: #1a1a1a;
     --accent: #C8A84B;
     --accent2: #8B6914;
-    --bg: #F5F0E8;
+    --bg: #2b2b2b;
     --white: #ffffff;
-    --text: #1a1a1a;
+    --text: #f0f0f0;
   }
 
   body {
@@ -86,8 +139,9 @@
     padding: 20px 15px;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
-    height: auto;
-    min-height: 100px;
+    height: calc(100vh - 52px);
+    overflow-y: auto;
+    box-sizing: border-box;
     z-index: 999;
     border-right: 2px solid var(--accent);
   }
@@ -111,7 +165,7 @@
   h1 {
     text-align: center;
     font-family: 'Bebas Neue', cursive;
-    color: var(--primary);
+    color: var(--accent);
     margin-top: 80px;
     font-size: 34px;
     letter-spacing: 2px;
@@ -120,10 +174,10 @@
   form {
     max-width: 420px;
     margin: 0 auto;
-    background-color: white;
+    background-color: #1a1a1a;
     padding: 24px;
     border-radius: 10px;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.3);
     border-top: 4px solid var(--accent);
   }
 
@@ -134,7 +188,7 @@
     letter-spacing: 0.5px;
     display: block;
     margin-bottom: 4px;
-    color: #444;
+    color: #ccc;
   }
 
   form input,
@@ -143,11 +197,13 @@
     width: 100%;
     padding: 12px;
     margin-bottom: 14px;
-    border: 1px solid #ddd;
+    border: 1px solid #444;
     border-radius: 6px;
     box-sizing: border-box;
     font-family: 'Barlow', sans-serif;
     font-size: 14px;
+    background-color: #2b2b2b;
+    color: #f0f0f0;
   }
 
   form input:focus, form select:focus {
@@ -157,8 +213,8 @@
   }
 
   form button {
-    background-color: var(--primary);
-    color: white;
+    background-color: var(--accent);
+    color: var(--primary);
     border: none;
     cursor: pointer;
     font-weight: 700;
@@ -166,6 +222,7 @@
     letter-spacing: 1px;
     border-radius: 6px;
     transition: background 0.2s;
+    text-decoration: none;
   }
 
   form button:hover { background-color: var(--accent2); }
@@ -184,11 +241,9 @@
     margin-bottom: 15px;
     font-size: 20px;
     font-family: 'Bebas Neue', cursive;
-    color: var(--primary);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    position: relative;
+    color: var(--accent);
     padding-bottom: 8px;
+    position: relative;
   }
 
   .gallery-category h3::after {
@@ -351,8 +406,8 @@
   }
 
   .book-now-btn {
-    background: linear-gradient(135deg, var(--primary), #333);
-    color: var(--accent);
+    background: var(--accent);
+    color: var(--primary);
     font-weight: 700;
     padding: 10px 24px;
     border: 2px solid var(--accent);
@@ -362,10 +417,12 @@
     font-size: 16px;
     letter-spacing: 1px;
     transition: all 0.2s;
+    text-decoration: none;
   }
 
   .book-now-btn:hover {
-    background: var(--accent);
+    background: var(--accent2);
+    border-color: var(--accent2);
     color: var(--primary);
   }
 
@@ -395,8 +452,8 @@
 <!-- Header -->
 <div class="header-bar">
   <button class="menu-button" onclick="toggleMenu()">☰</button>
-  <div class="header-title">✂ PURGE CUTZ</div>
-  <a class="location-button" href="https://maps.app.goo.gl/RY8b75AjqCmRuB5m6" target="_blank">📍</a>
+  <div class="header-title">JEROME CELEBRITY ✂</div>
+  <a class="location-button" href="https://maps.app.goo.gl/9RjuubmfzsV83WBk7" target="_blank">📍</a>
 </div>
 
 <!-- Gallery Section -->
@@ -410,10 +467,13 @@
   <a onclick="showSection('gallerySection'); closeMenu();">✂ CUTS</a>
   <a onclick="showSection('bookingSection'); closeMenu();">📆 BOOKING</a>
   <a onclick="showSection('reviewsSection'); closeMenu();">⭐ REVIEWS</a>
+  <a onclick="showSection('walkInPriceSection'); closeMenu();">💰 Walk-In Price List</a>
 
   <div class="opening-hours">
-    <h3>HOURS:</h3>
-    <p>Mon – Sat: 9:00 AM – 6:00 PM</p>
+    <h3>APPOINTMENTS:</h3>
+    <p>Mon, Wed, Fri: 10:00 AM – 7:00 PM</p>
+    <h3 style="margin-top:6px;">WALK-INS:</h3>
+    <p>Tue, Thu, Sat: 10:00 AM – 6:00 PM</p>
     <p>Sunday: Closed</p>
   </div>
 
@@ -436,25 +496,25 @@
         <path fill="url(#ig)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
       </svg>
     </a>
-    <a href="https://www.tiktok.com/@purge_cutz?is_from_webapp=1&sender_device=pc" target="_blank" style="display:inline-block;">
+  <!--  <a href="https://www.tiktok.com/" target="_blank" style="display:inline-block;">
       <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 448 512">
         <path fill="#ff0050" d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25v178.72A162.55 162.55 0 1 1 185 188.31v89.89a74.62 74.62 0 1 0 52.23 71.18V0h88a121.18 121.18 0 0 0 1.86 22.17A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14z" transform="translate(3,3)"/>
         <path fill="#25f4ee" d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25v178.72A162.55 162.55 0 1 1 185 188.31v89.89a74.62 74.62 0 1 0 52.23 71.18V0h88a121.18 121.18 0 0 0 1.86 22.17A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14z" transform="translate(-3,-3)"/>
         <path fill="#ffffff" d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25v178.72A162.55 162.55 0 1 1 185 188.31v89.89a74.62 74.62 0 1 0 52.23 71.18V0h88a121.18 121.18 0 0 0 1.86 22.17A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14z"/>
       </svg>
-    </a>
+    </a> -->
   </div>
 
   <div class="separator-line" style="margin-top:18px;"></div>
 
   <div class="location-info">
     <h3>LOCATION:</h3>
-    <p>Your Shop Address Here, City, Jamaica</p>
+    <p>Shop 24, Pavilion Mall, Half way tree Jamaica</p>
   </div>
 
   <div class="separator-line"></div>
 
-  <a onclick="logoutUser(); closeMenu();" style="display:block; text-align:center; margin:10px auto; padding:8px 10px; background-color:#c0392b; color:white; border-radius:6px; cursor:pointer; text-decoration:none; width:85%; font-weight:bold; font-size:13px;">LOGOUT</a>
+  <a id="authMenuBtn" onclick="handleAuthButtonClick(); closeMenu();" style="display:block; text-align:center; margin:10px auto; padding:8px 10px; background-color:#333; color:var(--accent); border-radius:6px; cursor:pointer; text-decoration:none; width:85%; font-weight:bold; font-size:13px; border:1px solid var(--accent);">LOG IN</a>
   <a class="admin-button" onclick="login(); closeMenu();" style="display:block; text-align:center; margin:8px auto; padding:8px 10px; border-radius:6px; text-decoration:none; width:85%; font-weight:bold; font-size:13px;">ADMIN</a>
 </div>
 
@@ -475,9 +535,33 @@
   </div>
 </div>
 
+<!-- Payment Info Modal -->
+<div id="paymentInfoModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background-color:rgba(0,0,0,0.5); justify-content:center; align-items:center; z-index:10000;">
+  <div id="paymentInfoBox" style="background:#fff; padding:20px; border-radius:12px; max-width:400px; width:90%; max-height:80vh; overflow-y:auto; box-shadow:0 4px 12px rgba(0,0,0,0.2); position:relative; border-top:4px solid var(--accent);">
+    <button onclick="closePaymentInfo()" style="position:sticky; top:0; right:0; float:right; background:#fff; border:none; font-size:24px; cursor:pointer; z-index:10001; color:#999;">✖</button>
+    <h3 style="margin:10px 0 18px; color:#1a1a1a; text-align:center; font-family:'Bebas Neue',cursive; letter-spacing:2px;">PAYMENT INFO</h3>
+    <div style="border:1px solid #ddd; border-radius:10px; padding:14px; background:white; box-shadow:0 2px 5px rgba(0,0,0,0.08); border-left:4px solid var(--accent); color:#000;">
+      <h3 style="margin-top:0; color:#000; font-size:17px; font-family:'Bebas Neue',cursive; letter-spacing:1px;">🏦 Scotiabank Account Details</h3>
+      <p style="margin:6px 0; font-size:14px; color:#000;"><strong>👤 First Name:</strong> JEROME</p>
+      <p style="margin:6px 0; font-size:14px; color:#000;"><strong>👤 Last Name:</strong> LECKY</p>
+      <p style="margin:6px 0; font-size:14px; color:#000;"><strong>🏦 Bank Name:</strong> Scotiabank</p>
+      <p style="margin:6px 0; font-size:14px; color:#000;"><strong>🔢 Branch/Transit Number:</strong> 60145</p>
+      <p style="margin:6px 0; font-size:14px; color:#000;"><strong>💳 Account Type:</strong> SAVINGS</p>
+      <p style="margin:6px 0; font-size:14px; color:#000;"><strong>🔢 Account Number:</strong> 000901858</p>
+      <p style="margin:6px 0; font-size:14px; color:#000;"><strong>💱 Account Currency:</strong> JMD</p>
+    </div>
+  </div>
+</div>
+
 <!-- Booking Section -->
 <div class="content-section" id="bookingSection">
   <h1>BOOK YOUR CUT</h1>
+  <div style="max-width:420px; margin:0 auto 16px; background:#1a1a1a; border-left:4px solid var(--accent); border-radius:6px; padding:12px 16px; font-size:13px; color:#ccc; line-height:1.6;">
+    📅 <strong style="color:var(--accent);">Appointments:</strong> Mondays, Wednesdays &amp; Fridays only<br>
+    🚶 <strong style="color:var(--accent);">Walk-ins:</strong> Tuesdays, Thursdays &amp; Saturdays<br>
+    ⛔ No line-ups on appointment days<br>
+    ⏱ <strong style="color:#e74c3c;">10-minute grace period</strong> — late arrivals lose their spot
+  </div>
   <form onsubmit="submitBooking(event)">
     <label for="name">Name:</label>
     <input id="name" required type="text" placeholder="Your full name"/>
@@ -493,45 +577,58 @@
       <option value="">COMPLETE FORM TO SEE AVAILABLE SLOTS</option>
     </select>
 
-    <!-- Haircut Services -->
-    <label for="haircutType">Haircut:</label>
-    <select id="haircutType" onchange="showEstimateTime(); loadAvailableSlots();">
+    <!-- Haircut Age Group -->
+    <label for="ageGroup">Haircut:</label>
+    <select id="ageGroup" onchange="onAgeGroupChange();">
       <option value="NONE">NONE</option>
-      <option value="Regular Cut">Regular Cut — $1,500</option>
-      <option value="Fade">Fade — $2,000</option>
-      <option value="Skin Fade">Skin Fade — $2,500</option>
-      <option value="Shape Up">Shape Up — $1,000</option>
-      <option value="Kids Cut">Kids Cut — $1,200</option>
+      <option value="adult">ADULT CUT 18+</option>
+      <option value="teen">TEENAGER CUTS 13–17</option>
+      <option value="kids">KIDS CUTS 3–12</option>
     </select>
 
-    <!-- Beard Services -->
-    <label for="beardType">Beard:</label>
-    <select id="beardType" onchange="showEstimateTime(); loadAvailableSlots();">
-      <option value="NONE">NONE</option>
-      <option value="Beard Trim">Beard Trim — $800</option>
-      <option value="Beard Shape Up">Beard Shape Up — $1,200</option>
-      <option value="Full Beard Design">Full Beard Design — $2,000</option>
-      <option value="Hot Towel Shave">Hot Towel Shave — $2,500</option>
-    </select>
+    <!-- Adult: service picker -->
+    <div id="adultServiceWrap" style="display:none;">
+      <label for="adultService">Adult Service:</label>
+      <select id="adultService" onchange="onServiceChange();">
+        <option value="NONE">— Select a service —</option>
+        <option value="Celebrity Premium Cut">⭐ Celebrity Premium Cut — $3,500</option>
+        <option value="Celebrity Regular Cut">✂ Celebrity Regular Cut — $3,000</option>
+      </select>
+    </div>
 
-    <!-- Combo Services -->
-    <label for="comboType">Combo Services:</label>
-    <select id="comboType" onchange="showEstimateTime(); loadAvailableSlots();">
-      <option value="NONE">NONE</option>
-      <option value="Cut & Beard">Cut & Beard — $3,000</option>
-      <option value="Fade & Beard Design">Fade & Beard Design — $4,000</option>
-    </select>
+    <!-- Teen: service picker -->
+    <div id="teenServiceWrap" style="display:none;">
+      <label for="teenService">Teen Service:</label>
+      <select id="teenService" onchange="onServiceChange();">
+        <option value="NONE">— Select a service —</option>
+        <option value="Teenage Premium Cut">⭐ Celebrity Premium Cut — $2,500</option>
+        <option value="Teenage Regular Cut">✂ Celebrity Regular Cut — $2,000</option>
+      </select>
+    </div>
 
-    <!-- Other Services -->
-    <label for="otherType">Other Services:</label>
-    <select id="otherType" onchange="showEstimateTime(); loadAvailableSlots();">
-      <option value="NONE">NONE</option>
-      <option value="Hair Wash">Hair Wash — $500</option>
-      <option value="Scalp Treatment">Scalp Treatment — $1,500</option>
-      <option value="Kid Package">Kid Package (Cut + Wash) — $2,000</option>
-    </select>
+    <!-- Kids: service picker -->
+    <div id="kidsServiceWrap" style="display:none;">
+      <label for="kidsService">Kids Service:</label>
+      <select id="kidsService" onchange="onServiceChange();">
+        <option value="NONE">— Select a service —</option>
+        <option value="Kids Premium Cut">⭐ Celebrity Premium Cut — $2,000</option>
+        <option value="Kids Regular Cut">✂ Celebrity Regular Cut — $1,500</option>
+      </select>
+    </div>
 
-    <p id="estimateTimeMessage" style="color:var(--accent2); font-weight:bold; font-size:14px;"></p>
+    <!-- Hidden field that carries the real service value for booking logic -->
+    <input type="hidden" id="haircutType" value="NONE"/>
+
+    <!-- Service / Pricing Card -->
+    <div id="serviceIncludesCard" style="display:none; margin-bottom:8px; border-radius:8px; overflow:hidden; border:1px solid var(--accent); background:#1e1e1e;"></div>
+
+    <!-- Selected items summary -->
+    <div id="selectionSummary" style="display:none; margin-bottom:14px; padding:10px 12px; background:#111; border:1px solid var(--accent); border-radius:6px;">
+      <div id="selectionSummaryTitle" style="font-family:'Bebas Neue',cursive;letter-spacing:1.5px;font-size:13px;color:var(--accent);margin-bottom:5px;">✔ YOUR SELECTION:</div>
+      <div id="selectionSummaryText"></div>
+    </div>
+
+    <p id="estimateTimeMessage" style="display:none;"></p>
 
     <button type="submit">BOOK NOW ✂</button>
   </form>
@@ -560,6 +657,84 @@
   </form>
   <p id="reviewSubmitMsg" style="text-align:center; color:green;"></p>
   <div id="reviewsContainer" style="max-width:600px; margin:20px auto; padding:0 15px;"></div>
+</div>
+
+<!-- Walk-In Price List Section -->
+<div class="content-section" id="walkInPriceSection">
+  <h1 style="font-family:'Bebas Neue',cursive; letter-spacing:2px; color:var(--accent); text-align:center; margin-top:80px; font-size:30px;">Walk-In Price List</h1>
+  <div style="max-width:420px; margin:0 auto 24px; background:#1a1a1a; border-left:4px solid var(--accent); border-radius:6px; padding:10px 16px; font-size:13px; color:#ccc; line-height:1.6;">
+    🚶 <strong style="color:var(--accent);">Walk-ins:</strong> Tuesdays, Thursdays &amp; Saturdays &nbsp;|&nbsp; 10:00 AM – 6:00 PM
+  </div>
+
+  <div style="max-width:420px; margin:0 auto; padding:0 16px 80px;">
+
+    <!-- Single Walk-In Price List Card -->
+    <div style="background:#1a1a1a; border-radius:10px; overflow:hidden; margin-bottom:16px; border:1px solid rgba(200,168,75,0.3);">
+      <div style="background:var(--accent); padding:10px 16px;">
+        <span style="font-family:'Bebas Neue',cursive; letter-spacing:2px; font-size:15px; color:#1a1a1a;">💈 WALK IN PRICE LIST</span>
+      </div>
+      <div style="padding:12px 16px;">
+
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.07);">
+          <span style="font-size:14px; color:#f0f0f0;">Haircut &amp; Taper with Eyebrow &amp; Dye</span>
+          <span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,700</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.07);">
+          <span style="font-size:14px; color:#f0f0f0;">Celebrity Big Chop</span>
+          <span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$3,000</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.07);">
+          <span style="font-size:14px; color:#f0f0f0;">Taper &amp; Fades Only with Spray Dye</span>
+          <span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,300</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.07);">
+          <span style="font-size:14px; color:#f0f0f0;">Line Ups</span>
+          <span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,000</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.07);">
+          <span style="font-size:14px; color:#f0f0f0;">Teenagers</span>
+          <span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,000</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.07);">
+          <span style="font-size:14px; color:#f0f0f0;">Kids (3–12)</span>
+          <span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,500</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.07);">
+          <span style="font-size:14px; color:#f0f0f0;">Female Haircuts</span>
+          <span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,500</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.07);">
+          <span style="font-size:14px; color:#f0f0f0;">Eyebrow</span>
+          <span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$500</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.07);">
+          <span style="font-size:14px; color:#f0f0f0;">Premium Eyebrow Tinting with Concealer</span>
+          <span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,000</span>
+        </div>
+
+        <!-- Optional Extra label -->
+        <div style="margin-top:12px; margin-bottom:4px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--accent);">Optional Extra</div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.07);">
+          <span style="font-size:14px; color:#f0f0f0;">Dye</span>
+          <span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$300</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.07);">
+          <span style="font-size:14px; color:#f0f0f0;">Beard Dye</span>
+          <span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$200</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.07);">
+          <span style="font-size:14px; color:#f0f0f0;">Warm Towel</span>
+          <span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$500</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0;">
+          <span style="font-size:14px; color:#f0f0f0;">Custom Designs</span>
+          <span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$100+</span>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
 </div>
 
 <!-- Admin Login Modal -->
@@ -591,15 +766,14 @@
 <script>
   let currentUser = null;
 
-  const firebaseConfig = {
-  apiKey: "AIzaSyB1nE1lIgafauY3i2zV7F0lFeOHiUYjeWM",
-  authDomain: "purge-cutz.firebaseapp.com",
-  projectId: "purge-cutz",
-  storageBucket: "purge-cutz.firebasestorage.app",
-  messagingSenderId: "915681565699",
-  appId: "1:915681565699:web:f4e49f54bdf6e090598236"
+ const firebaseConfig = {
+  apiKey: "AIzaSyD837JBOi4EdywnaPAmCS1krL9HLHy90CI",
+  authDomain: "jerome-celebrity-kutt.firebaseapp.com",
+  projectId: "jerome-celebrity-kutt",
+  storageBucket: "jerome-celebrity-kutt.firebasestorage.app",
+  messagingSenderId: "43174384691",
+  appId: "1:43174384691:web:9509d2f7a1e4393306ff46"
 };
-
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
   const storage = firebase.storage();
@@ -607,12 +781,13 @@
   firebase.auth().onAuthStateChanged(user => {
     currentUser = user || null;
     loadReviews(currentUser);
+    updateAuthButton(user);
   });
 
   // ========== AUTH ==========
   // AUTHORISED ADMIN UID — set this to the Google account UID of your admin
   // Find it in Firebase Console → Authentication → Users after first login
-  const ADMIN_UID = "gXItXsQ7OpY2jqvfJMwxZIg0ntx1";
+  const ADMIN_UID = "SewyjnBazRdI19ZHuaqBlx7e8zG2";
 
   function login() {
     document.getElementById('adminLoginModal').style.display = 'flex';
@@ -633,14 +808,14 @@
     firebase.auth().signInWithPopup(provider)
       .then((result) => {
         const user = result.user;
-        // Check UID matches the authorised admin
         if (user.uid !== ADMIN_UID) {
-          // Not the admin — sign them out immediately
-          firebase.auth().signOut();
-          msg.textContent = "Access denied. This Google account is not authorised as admin.";
-          msg.style.display = "block";
-          return;
+          // UID doesn't match — force sign out, block all access
+          return firebase.auth().signOut().then(() => {
+            msg.textContent = "Access denied. This Google account is not authorised as admin.";
+            msg.style.display = "block";
+          });
         }
+        // UID confirmed — only now allow dashboard access
         closeAdminModal();
         window.location.href = 'dashboard.html';
       })
@@ -653,8 +828,43 @@
 
   function logoutUser() {
     firebase.auth().signOut()
-      .then(() => { window.location.href = 'login.html'; })
       .catch(error => { alert('Logout failed: ' + error.message); });
+  }
+
+  function googleSignIn() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: 'select_account' });
+    firebase.auth().signInWithPopup(provider)
+      .catch(error => {
+        if (error.code !== 'auth/popup-closed-by-user') {
+          alert('Sign-in failed: ' + error.message);
+        }
+      });
+  }
+
+  function handleAuthButtonClick() {
+    const user = firebase.auth().currentUser;
+    if (user) {
+      logoutUser();
+    } else {
+      googleSignIn();
+    }
+  }
+
+  function updateAuthButton(user) {
+    const btn = document.getElementById('authMenuBtn');
+    if (!btn) return;
+    if (user) {
+      btn.textContent = 'LOGOUT';
+      btn.style.backgroundColor = '#c0392b';
+      btn.style.color = 'white';
+      btn.style.border = '1px solid #c0392b';
+    } else {
+      btn.textContent = 'LOG IN';
+      btn.style.backgroundColor = '#333';
+      btn.style.color = 'var(--accent)';
+      btn.style.border = '1px solid var(--accent)';
+    }
   }
 
   // ========== MENU ==========
@@ -694,14 +904,21 @@
     const galleryContainer = document.getElementById(containerId);
     galleryContainer.innerHTML = '';
 
-    db.collection('gallery').onSnapshot((querySnapshot) => {
+    db.collection('gallery').orderBy('sortOrder', 'asc').onSnapshot((querySnapshot) => {
       galleryContainer.innerHTML = '';
+      let docs = [];
+      querySnapshot.forEach(doc => docs.push({ id: doc.id, ...doc.data() }));
+      docs.sort((a, b) => {
+        if (a.sortOrder !== undefined && b.sortOrder !== undefined) return a.sortOrder - b.sortOrder;
+        if (a.sortOrder !== undefined) return -1;
+        if (b.sortOrder !== undefined) return 1;
+        return 0;
+      });
       const categories = {};
 
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        const imageUrl = data.url;
-        const category = data.category || 'Uncategorized';
+      docs.forEach((item) => {
+        const imageUrl = item.url;
+        const category = item.category || 'Uncategorized';
 
         if (!categories[category]) categories[category] = [];
         categories[category].push(imageUrl);
@@ -741,23 +958,28 @@
   });
 
   // ========== BUSINESS HOURS ==========
+  // Appointment days: Mon, Wed, Fri | Walk-in days: Tue, Thu, Sat | Closed: Sun
   const businessHours = {
-    'Monday': { open: '9:00 AM', close: '6:00 PM' },
-    'Tuesday': null,
-    'Wednesday': { open: '9:00 AM', close: '6:00 PM' },
-    'Thursday': { open: '9:00 AM', close: '6:00 PM' },
-    'Friday': { open: '9:00 AM', close: '6:00 PM' },
-    'Saturday': { open: '9:00 AM', close: '6:00 PM' },
+    'Monday': { open: '10:00 AM', close: '7:00 PM' },
+    'Tuesday': null,   // Walk-in only — no online appointments
+    'Wednesday': { open: '10:00 AM', close: '7:00 PM' },
+    'Thursday': null,  // Walk-in only — no online appointments
+    'Friday': { open: '10:00 AM', close: '7:00 PM' },
+    'Saturday': null,  // Walk-in only — no online appointments
     'Sunday': null
   };
 
+  const walkInDays = ['Tuesday', 'Thursday', 'Saturday'];
+
   // ========== SERVICE DURATIONS ==========
   const serviceDurations = {
-    "Regular Cut": 30,
-    "Fade": 45,
-    "Skin Fade": 50,
-    "Shape Up": 20,
-    "Kids Cut": 25,
+    "Celebrity Premium Cut": 45,
+    "Celebrity Regular Cut": 35,
+    "Teenage Premium Cut": 30,
+    "Teenage Regular Cut": 20,
+    "Kids Premium Cut": 30,
+    "Kids Regular Cut": 30,
+    "Kids Cut": 30,
     "Beard Trim": 20,
     "Beard Shape Up": 25,
     "Full Beard Design": 35,
@@ -766,51 +988,444 @@
     "Fade & Beard Design": 75,
     "Hair Wash": 15,
     "Scalp Treatment": 30,
-    "Kid Package": 40
+    "Kid Package": 30,
+    "Big Chop Transformation": 45,
+    "adult-custom": 35,
+    "teen-custom": 20
   };
 
   function getSelectedServices() {
     const haircut = document.getElementById('haircutType')?.value || "NONE";
-    const beard = document.getElementById('beardType')?.value || "NONE";
-    const combo = document.getElementById('comboType')?.value || "NONE";
-    const other = document.getElementById('otherType')?.value || "NONE";
+    if (!haircut || haircut === 'NONE') return 'No services selected';
 
-    let services = [];
-    [haircut, beard, combo, other].forEach(s => { if (s && s !== 'NONE') services.push(s); });
-    return services.length > 0 ? services.join(', ') : 'No services selected';
+    const def = pricingCardDefs[haircut];
+    const packageLabel = def ? def.label : haircut;
+
+    const parts = [packageLabel];
+    if (selectedCutItem) parts.push('Cut: ' + selectedCutItem);
+    selectedAddons.forEach(a => parts.push('Add-on: ' + a));
+
+    return parts.join(' | ');
   }
 
   function getSelectedServiceDuration() {
     const haircut = document.getElementById('haircutType').value;
-    const beard = document.getElementById('beardType').value;
-    const combo = document.getElementById('comboType').value;
-    const other = document.getElementById('otherType').value;
-
-    let totalDuration = 0;
-    [haircut, beard, combo, other].forEach(s => { if (s && s !== 'NONE') totalDuration += serviceDurations[s] || 0; });
-    return totalDuration || 30;
+    return (haircut && haircut !== 'NONE' ? serviceDurations[haircut] : 0) || 30;
   }
 
-  function showEstimateTime() {
-    const haircut = document.getElementById('haircutType').value;
-    const beard = document.getElementById('beardType').value;
-    const combo = document.getElementById('comboType').value;
-    const other = document.getElementById('otherType').value;
-    const msg = document.getElementById('estimateTimeMessage');
+  function showEstimateTime() { /* duration display removed */ }
 
-    if ([haircut, beard, combo, other].every(s => s === 'NONE')) { msg.innerHTML = ''; return; }
+  // ========== ADDON PRICES ==========
+  const addonPrices = {
+    'Custom Design': 200,
+    'Black Dye': 300,
+  };
 
-    let total = 0;
-    [haircut, beard, combo, other].forEach(s => { if (s && s !== 'NONE') total += serviceDurations[s] || 0; });
+  // Per-cut price overrides: used when a specific cut changes the base price
+  const cutPriceOverrides = {
+    'Kids Premium Cut': { 'Big Chop': 2500 }
+  };
 
-    if (total > 0) {
-      const h = Math.floor(total / 60);
-      const m = total % 60;
-      let str = '';
-      if (h) str += `${h} hour${h > 1 ? 's' : ''}`;
-      if (m) { if (str) str += ' and '; str += `${m} minute${m > 1 ? 's' : ''}`; }
-      msg.innerHTML = `⏱ Estimated Duration: ~${str}`;
+  let selectedCutPrice = null; // price of the currently selected cut (if override exists)
+
+  function getSelectedTotal() {
+    const haircut = document.getElementById('haircutType')?.value || 'NONE';
+    if (!haircut || haircut === 'NONE') return 0;
+    const def = pricingCardDefs[haircut];
+    let total = selectedCutPrice !== null ? selectedCutPrice : (def?.basePrice || 0);
+    selectedAddons.forEach(a => { if (addonPrices[a]) total += addonPrices[a]; });
+    return total;
+  }
+
+  // ========== AGE GROUP / PRICING CARD LOGIC ==========
+
+  // ========== SELECTION TRACKING ==========
+  // Tracks which cut + add-ons the user has tapped
+  let selectedCutItem = null;     // only 1 cut allowed
+  let selectedAddons = new Set(); // multiple add-ons allowed
+
+  function toggleCut(el, name) {
+    // Deselect previous cut
+    document.querySelectorAll('.cut-item.selected').forEach(e => e.classList.remove('selected'));
+    if (selectedCutItem === name) {
+      selectedCutItem = null;
+      selectedCutPrice = null;
+    } else {
+      selectedCutItem = name;
+      el.classList.add('selected');
+      // Check for a per-cut price override
+      const haircut = document.getElementById('haircutType')?.value || 'NONE';
+      const overrides = cutPriceOverrides[haircut];
+      selectedCutPrice = (overrides && overrides[name] !== undefined) ? overrides[name] : null;
     }
+    updateSelectionSummary();
+  }
+
+  function toggleAddon(el, name) {
+    if (selectedAddons.has(name)) {
+      selectedAddons.delete(name);
+      el.classList.remove('selected');
+    } else {
+      selectedAddons.add(name);
+      el.classList.add('selected');
+    }
+    updateSelectionSummary();
+  }
+
+  function updateSelectionSummary() {
+    const summaryBox = document.getElementById('selectionSummary');
+    const summaryText = document.getElementById('selectionSummaryText');
+    if (!summaryBox || !summaryText) return;
+    const parts = [];
+    if (selectedCutItem) parts.push('✂ ' + selectedCutItem);
+    selectedAddons.forEach(a => parts.push('+ ' + a));
+    if (parts.length === 0) {
+      summaryBox.style.display = 'none';
+      summaryText.innerHTML = '';
+    } else {
+      summaryBox.style.display = 'block';
+      const total = getSelectedTotal();
+      const totalStr = total > 0 ? `<div style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(200,168,75,0.3);font-family:'Bebas Neue',cursive;letter-spacing:1px;font-size:15px;color:var(--accent);">💰 ESTIMATED TOTAL: $${total.toLocaleString()}</div>` : '';
+      summaryText.innerHTML = parts.map(p => `<span style="display:inline-block;background:#2a2a2a;border:1px solid var(--accent);border-radius:4px;padding:3px 8px;margin:3px 3px 3px 0;font-size:12px;color:var(--accent);font-weight:700;">${p}</span>`).join('') + totalStr;
+    }
+  }
+
+  function clearSelections() {
+    selectedCutItem = null;
+    selectedCutPrice = null;
+    selectedAddons.clear();
+    document.querySelectorAll('.cut-item.selected, .addon-item.selected').forEach(e => e.classList.remove('selected'));
+    updateSelectionSummary();
+  }
+
+  // Returns the full service string sent to admin
+  function getSelectedItemsString(packageLabel) {
+    const parts = [];
+    if (packageLabel) parts.push(packageLabel);
+    if (selectedCutItem) parts.push('Cut: ' + selectedCutItem);
+    selectedAddons.forEach(a => parts.push('Add-on: ' + a));
+    return parts.join(' | ');
+  }
+
+  // ========== PRICING CARD BUILDER ==========
+  // Shared CSS injected once
+  (function injectCardStyles() {
+    const s = document.createElement('style');
+    s.textContent = `
+      .cut-item, .addon-item {
+        padding: 8px 10px;
+        border-bottom: 1px solid rgba(200,168,75,0.12);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background 0.15s, border-color 0.15s;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .cut-item:hover, .addon-item:hover { background: rgba(200,168,75,0.08); }
+      .cut-item.selected { background: rgba(200,168,75,0.18); border-left: 3px solid var(--accent); }
+      .addon-item.selected { background: rgba(200,168,75,0.14); border-left: 3px solid #e0c060; }
+      .item-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; display:inline-block; }
+      .item-label { display:flex; align-items:center; gap:8px; font-size:13px; color:#ddd; font-family:'Barlow',sans-serif; }
+      .item-price { font-size:12px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:8px; }
+      .item-check { font-size:14px; margin-left:6px; color:var(--accent); }
+      .card-section-title { margin:10px 0 4px; color:var(--accent); font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:1px; padding:0 2px; }
+      .tap-hint { font-size:11px; color:#888; text-align:center; padding:6px 0 2px; font-style:italic; }
+      #selectionSummary { margin-top:8px; padding:10px 12px; background:#111; border:1px solid var(--accent); border-radius:6px; display:none; }
+      #selectionSummaryTitle { font-family:'Bebas Neue',cursive; letter-spacing:1.5px; font-size:13px; color:var(--accent); margin-bottom:5px; }
+    `;
+    document.head.appendChild(s);
+  })();
+
+  function buildCutRow(name, price, isAddon) {
+    const cls = isAddon ? 'addon-item' : 'cut-item';
+    const dotColor = isAddon ? '#e0c060' : 'var(--accent)';
+    const fn = isAddon ? `toggleAddon(this,'${name.replace(/'/g,"\\'")}')` : `toggleCut(this,'${name.replace(/'/g,"\\'")}')`;
+    const priceStr = price && price !== '$' ? `<span class="item-price">${price}</span>` : '';
+    return `<div class="${cls}" onclick="${fn}">
+      <span class="item-label"><span class="item-dot" style="background:${dotColor};"></span>${name}${priceStr}</span>
+      <span class="item-check">☐</span>
+    </div>`;
+  }
+
+  // Override selected check icon via event delegation
+  document.addEventListener('click', function(e) {
+    const row = e.target.closest('.cut-item, .addon-item');
+    if (!row) return;
+    // update checkmark icons
+    row.closest('#serviceIncludesCard')?.querySelectorAll('.cut-item .item-check, .addon-item .item-check').forEach(ic => {
+      ic.textContent = ic.closest('.cut-item, .addon-item').classList.contains('selected') ? '✔' : '☐';
+    });
+  });
+
+  function buildPricingCard(headerHTML, sections) {
+    // sections = [{title, items:[{name,price,isAddon}], isMutex}]
+    let html = `<div style="background:var(--accent);padding:10px 14px;">
+      <span style="font-family:'Bebas Neue',cursive;letter-spacing:2px;font-size:14px;color:#1a1a1a;">${headerHTML}</span>
+    </div>
+    <div style="padding:8px 12px 10px;">
+      <div class="tap-hint">👆 Tap items below to select what you want</div>`;
+    sections.forEach(sec => {
+      if (sec.title) html += `<div class="card-section-title">${sec.title}</div>`;
+      sec.items.forEach(it => { html += buildCutRow(it.name, it.price, it.isAddon); });
+    });
+    html += `</div>`;
+    return html;
+  }
+
+  const pricingCardDefs = {
+
+    "Celebrity Premium Cut": {
+      label: "Adult 18+ — Celebrity Premium Cut ($3,500)",
+      basePrice: 3500,
+      html: () => buildPricingCard('⭐ ADULT 18+ — MEN CELEBRITY PREMIUM CUT &nbsp;|&nbsp; $3,500 &nbsp;|&nbsp; 45 mins', [
+        { title: 'Cut of Choice (pick one):', items: [
+          {name:'All Round Fade',price:''},
+          {name:'Taper Fade',price:''},
+          {name:'One Level',price:''},
+          {name:'Bald Cut',price:''},
+          {name:'Mohawk',price:''},
+          {name:'Flat Top',price:''},
+          {name:'Big Chop',price:''},
+        ]},
+        { title: 'PLUS+ Add-ons Included (tap to confirm):', items: [
+          {name:'Eyebrows',price:'',isAddon:true},
+          {name:'Line Up',price:'',isAddon:true},
+          {name:'Head Dye',price:'',isAddon:true},
+          {name:'Beard Dye',price:'NO EXTRA COST',isAddon:true},
+          {name:'Warm Towel',price:'NO EXTRA COST',isAddon:true},
+        ]},
+        { title: 'Optional Extra:', items: [
+          {name:'Custom Design',price:'$200+',isAddon:true},
+        ]}
+      ])
+    },
+
+    "Celebrity Regular Cut": {
+      label: "Adult 18+ — Celebrity Regular Cut ($3,000)",
+      basePrice: 3000,
+      html: () => buildPricingCard('✂ ADULT 18+ — MEN CELEBRITY REGULAR CUT &nbsp;|&nbsp; $3,000 &nbsp;|&nbsp; 35 mins', [
+        { title: 'Cut of Choice (pick one):', items: [
+          {name:'All Round Fade',price:''},
+          {name:'Taper Fade',price:''},
+          {name:'One Level',price:''},
+          {name:'Bald Cut',price:''},
+          {name:'Mohawk',price:''},
+          {name:'Flat Top',price:''},
+        ]},
+        { title: 'PLUS+ Add-on Included (tap to confirm):', items: [
+          {name:'Black Dye',price:'',isAddon:true},
+        ]}
+      ])
+    },
+
+    "adult-custom": {
+      label: "Adult 18+ — Build Your Own Cut",
+      html: () => buildPricingCard('✂ ADULT 18+ — APPOINTMENT PRICE LIST', [
+        { title: 'Cuts (pick one):', items: [
+          {name:'All Round Fade',price:'$2,000'},
+          {name:'Taper Fade',price:'$2,000'},
+          {name:'One Level',price:'$2,000'},
+          {name:'Bald Cut',price:'$2,000'},
+          {name:'Mohawk',price:'$2,000'},
+          {name:'Flat Top',price:'$2,000'},
+        ]},
+        { title: 'Add-Ons (pick any):', items: [
+          {name:'Line Up',price:'$1,000',isAddon:true},
+          {name:'Custom Design',price:'$200+',isAddon:true},
+          {name:'Black Dye',price:'$300',isAddon:true},
+          {name:'Eyebrows',price:'$500',isAddon:true},
+        ]}
+      ])
+    },
+
+    "Teenage Premium Cut": {
+      label: "Teen 13–17 — Celebrity Premium Cut ($2,500)",
+      basePrice: 2500,
+      html: () => buildPricingCard('⭐ TEEN 13–17 — MEN CELEBRITY PREMIUM CUT &nbsp;|&nbsp; $2,500 &nbsp;|&nbsp; 30 mins', [
+        { title: 'Cut of Choice (pick one):', items: [
+          {name:'All Round Fade',price:''},
+          {name:'Taper Fade',price:''},
+          {name:'One Level',price:''},
+          {name:'Bald Cut',price:''},
+          {name:'Mohawk',price:''},
+          {name:'Flat Top',price:''},
+          {name:'Big Chop',price:''},
+        ]},
+        { title: 'PLUS+ Add-ons Included (tap to confirm):', items: [
+          {name:'Eyebrows',price:'',isAddon:true},
+          {name:'Line Up',price:'',isAddon:true},
+          {name:'Head Dye',price:'',isAddon:true},
+          {name:'Beard Dye',price:'NO EXTRA COST',isAddon:true},
+          {name:'Warm Towel',price:'NO EXTRA COST',isAddon:true},
+        ]},
+        { title: 'Optional Extra:', items: [
+          {name:'Custom Design',price:'$200+',isAddon:true},
+        ]}
+      ])
+    },
+
+    "Teenage Regular Cut": {
+      label: "Teen 13–17 — Celebrity Regular Cut ($2,000)",
+      basePrice: 2000,
+      html: () => buildPricingCard('✂ TEEN 13–17 — MEN CELEBRITY REGULAR CUT &nbsp;|&nbsp; $2,000 &nbsp;|&nbsp; 20 mins', [
+        { title: 'Cut of Choice (pick one):', items: [
+          {name:'All Round Fade',price:''},
+          {name:'Taper Fade',price:''},
+          {name:'One Level',price:''},
+          {name:'Bald Cut',price:''},
+          {name:'Mohawk',price:''},
+          {name:'Flat Top',price:''},
+        ]},
+        { title: 'PLUS+ Add-on Included (tap to confirm):', items: [
+          {name:'Black Dye',price:'',isAddon:true},
+        ]}
+      ])
+    },
+
+    "teen-custom": {
+      label: "Teen 13–17 — Build Your Own Cut",
+      html: () => buildPricingCard('✂ TEEN 13–17 — APPOINTMENT PRICE LIST', [
+        { title: 'Cuts (pick one):', items: [
+          {name:'All Round Fade',price:'$1,500'},
+          {name:'Taper Fade',price:'$1,500'},
+          {name:'One Level',price:'$1,500'},
+          {name:'Bald Cut',price:'$1,500'},
+          {name:'Mohawk',price:'$1,500'},
+          {name:'Flat Top',price:'$1,500'},
+        ]},
+        { title: 'Add-Ons (pick any):', items: [
+          {name:'Line Up',price:'$500',isAddon:true},
+          {name:'Custom Design',price:'$200+',isAddon:true},
+          {name:'Black Dye',price:'$300',isAddon:true},
+          {name:'Eyebrows',price:'$500',isAddon:true},
+        ]}
+      ])
+    },
+
+    "Kids Premium Cut": {
+      label: "Kids 3–12 — Celebrity Premium Cut ($2,000)",
+      basePrice: 2000,
+      html: () => buildPricingCard('⭐ KIDS 3–12 — CELEBRITY PREMIUM CUT &nbsp;|&nbsp; 30 mins', [
+        { title: 'Cut of Choice (pick one):', items: [
+          {name:'All Round Fade',price:'$2,000'},
+          {name:'Taper Fade',price:'$2,000'},
+          {name:'One Level',price:'$2,000'},
+          {name:'Bald Cut',price:'$2,000'},
+          {name:'Mohawk',price:'$2,000'},
+          {name:'Flat Top',price:'$2,000'},
+          {name:'Big Chop',price:'$2,500'},
+        ]},
+        { title: 'Optional Add-On:', items: [
+          {name:'Custom Design',price:'$200+',isAddon:true},
+          {name:'Black Dye',price:'$300',isAddon:true},
+        ]}
+      ])
+    },
+
+    "Kids Regular Cut": {
+      label: "Kids 3–12 — Celebrity Regular Cut ($1,500)",
+      basePrice: 1500,
+      html: () => buildPricingCard('✂ KIDS 3–12 — CELEBRITY REGULAR CUT &nbsp;|&nbsp; 30 mins', [
+        { title: 'Cut of Choice (pick one):', items: [
+          {name:'All Round Fade',price:'$1,500'},
+          {name:'Taper Fade',price:'$1,500'},
+          {name:'One Level',price:'$1,500'},
+          {name:'Bald Cut',price:'$1,500'},
+          {name:'Mohawk',price:'$1,500'},
+          {name:'Flat Top',price:'$1,500'},
+        ]}
+      ])
+    },
+
+    "Kids Cut": {
+      label: "Kids 3–12 — Cut",
+      html: () => buildPricingCard('✂ KIDS 3–12 — APPOINTMENT PRICE LIST &nbsp;|&nbsp; 30 mins', [
+        { title: 'Cuts (pick one):', items: [
+          {name:'All Round Fade',price:'$2,000'},
+          {name:'Taper Fade',price:'$2,000'},
+          {name:'One Level',price:'$2,000'},
+          {name:'Bald Cut',price:'$2,000'},
+          {name:'Mohawk',price:'$2,000'},
+          {name:'Flat Top',price:'$2,000'},
+          {name:'Big Chop',price:'$2,500'},
+        ]},
+        { title: 'Add-Ons (pick any):', items: [
+          {name:'Custom Design',price:'$200+',isAddon:true},
+          {name:'Black Dye',price:'$300',isAddon:true},
+        ]}
+      ])
+    }
+  };
+
+  // Compatibility shim — old code referenced pricingCards
+  const pricingCards = {};
+
+  function onAgeGroupChange() {
+    const group = document.getElementById('ageGroup').value;
+    document.getElementById('adultServiceWrap').style.display = 'none';
+    document.getElementById('teenServiceWrap').style.display = 'none';
+    document.getElementById('kidsServiceWrap').style.display = 'none';
+    document.getElementById('adultService').value = 'NONE';
+    document.getElementById('teenService').value = 'NONE';
+    document.getElementById('kidsService').value = 'NONE';
+
+    const card = document.getElementById('serviceIncludesCard');
+    const hidden = document.getElementById('haircutType');
+    clearSelections();
+
+    if (group === 'adult') {
+      document.getElementById('adultServiceWrap').style.display = 'block';
+      hidden.value = 'NONE';
+      card.style.display = 'none';
+      card.innerHTML = '';
+    } else if (group === 'teen') {
+      document.getElementById('teenServiceWrap').style.display = 'block';
+      hidden.value = 'NONE';
+      card.style.display = 'none';
+      card.innerHTML = '';
+    } else if (group === 'kids') {
+      document.getElementById('kidsServiceWrap').style.display = 'block';
+      hidden.value = 'NONE';
+      card.style.display = 'none';
+      card.innerHTML = '';
+    } else {
+      hidden.value = 'NONE';
+      card.style.display = 'none';
+      card.innerHTML = '';
+    }
+    showEstimateTime();
+    loadAvailableSlots();
+  }
+
+  function onServiceChange() {
+    const group = document.getElementById('ageGroup').value;
+    let svc = 'NONE';
+    if (group === 'adult') svc = document.getElementById('adultService').value;
+    else if (group === 'teen') svc = document.getElementById('teenService').value;
+    else if (group === 'kids') svc = document.getElementById('kidsService').value;
+
+    const hidden = document.getElementById('haircutType');
+    const card = document.getElementById('serviceIncludesCard');
+    clearSelections();
+
+    hidden.value = (svc === 'NONE') ? 'NONE' : svc;
+
+    if (svc && svc !== 'NONE' && pricingCardDefs[svc]) {
+      card.innerHTML = pricingCardDefs[svc].html();
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+      card.innerHTML = '';
+    }
+    showEstimateTime();
+    loadAvailableSlots();
+  }
+
+  function showServiceIncludes() {
+    // kept as no-op for compatibility — logic now in onAgeGroupChange / onServiceChange
   }
 
   // ========== TIME UTILS ==========
@@ -836,14 +1451,11 @@
   async function loadAvailableSlots() {
     const date = document.getElementById('date').value;
     const haircut = document.getElementById('haircutType')?.value || "NONE";
-    const beard = document.getElementById('beardType')?.value || "NONE";
-    const combo = document.getElementById('comboType')?.value || "NONE";
-    const other = document.getElementById('otherType')?.value || "NONE";
 
     const timeSelect = document.getElementById('selectedTime');
     timeSelect.innerHTML = "<option value=''>-- Select a time --</option>";
 
-    const hasService = [haircut, beard, combo, other].some(s => s !== "NONE");
+    const hasService = haircut !== "NONE";
     if (!date || !hasService) {
       timeSelect.innerHTML = "<option value=''>COMPLETE FORM TO SEE AVAILABLE SLOTS</option>";
       return;
@@ -852,6 +1464,11 @@
     const duration = getSelectedServiceDuration();
     const dayName = new Date(date + "T00:00:00").toLocaleDateString('en-US', { weekday: 'long' });
     const business = businessHours[dayName];
+
+    if (walkInDays.includes(dayName)) {
+      timeSelect.innerHTML = "<option value=''>Walk-ins only on " + dayName + "s — no online booking</option>";
+      return;
+    }
 
     if (!business) {
       timeSelect.innerHTML = "<option value=''>Closed this day</option>";
@@ -862,15 +1479,17 @@
     const closeMinutes = convertToMinutes(business.close);
 
     try {
+      const SLOT_INTERVAL = 35; // fixed 35-minute slot intervals
       const snapshot = await db.collection("bookings").where("date", "==", date).get();
       const bookings = snapshot.docs.map(doc => {
         const bookedTime = convertToMinutes(normalizeTimeStr(doc.data().time));
-        const bookedDuration = doc.data().duration || 30;
-        return { start: bookedTime, end: bookedTime + bookedDuration };
+        return { start: bookedTime, end: bookedTime + SLOT_INTERVAL };
       });
 
       const unavailableSnapshot = await db.collection("unavailableDays").where("date", "==", date).get();
       let unavailableRanges = [];
+      // 1:30 PM – 3:00 PM is always blocked (break every day)
+      unavailableRanges.push({ start: 13 * 60 + 30, end: 15 * 60 }); // 810 – 900 minutes
       unavailableSnapshot.forEach(doc => {
         const data = doc.data();
         if (data.allDay) {
@@ -882,31 +1501,41 @@
         }
       });
 
-      for (let t = openMinutes; t <= closeMinutes; t += 5) {
-        const end = t + duration;
+      const now = new Date();
+      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      const selectedDate = new Date(date + "T00:00:00");
+      const isToday = selectedDate.getTime() === today.getTime();
+      const currentMinutes = isToday ? now.getHours() * 60 + now.getMinutes() : 0;
 
-        const now = new Date();
-        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-        const selectedDate = new Date(date + "T00:00:00");
-        if (selectedDate.getTime() === today.getTime()) {
-          const currentMinutes = now.getHours() * 60 + now.getMinutes();
-          if (t <= currentMinutes) continue;
-        }
+      function formatMins(m) {
+        const h = Math.floor(m / 60);
+        const min = m % 60;
+        const ampm = h >= 12 ? "PM" : "AM";
+        const displayH = ((h + 11) % 12 + 1);
+        return `${displayH}:${min.toString().padStart(2, "0")} ${ampm}`;
+      }
 
-        let conflict = bookings.some(b => !(end <= b.start || t >= b.end)) ||
-                       unavailableRanges.some(r => !(end <= r.start || t >= r.end));
+      const SLOT_DISPLAY_DURATION = 35; // always show 35-min window on label
+      let t = openMinutes;
+      while (t + SLOT_INTERVAL <= closeMinutes + 1) {
+        const slotEnd = t + SLOT_DISPLAY_DURATION;
+        const bookingEnd = t + duration; // used only for conflict checking
 
-        if (!conflict) {
-          const hours = Math.floor(t / 60);
-          const minutes = t % 60;
-          const ampm = hours >= 12 ? "PM" : "AM";
-          const displayHours = ((hours + 11) % 12 + 1);
-          const displayTime = `${displayHours}:${minutes.toString().padStart(2, "0")} ${ampm}`;
-          let option = document.createElement("option");
-          option.value = displayTime;
-          option.textContent = displayTime;
-          timeSelect.appendChild(option);
-        }
+        if (isToday && t <= currentMinutes) { t += SLOT_INTERVAL; continue; }
+
+        const blockingRange = unavailableRanges.find(r => !(bookingEnd <= r.start || t >= r.end));
+        if (blockingRange) { t = blockingRange.end; continue; }
+
+        const bookedConflict = bookings.some(b => !(bookingEnd <= b.start || t >= b.end));
+        if (bookedConflict) { t += SLOT_INTERVAL; continue; }
+
+        const label = `${formatMins(t)} - ${formatMins(slotEnd)}`;
+        let option = document.createElement("option");
+        option.value = formatMins(t);
+        option.textContent = label;
+        timeSelect.appendChild(option);
+
+        t += SLOT_INTERVAL;
       }
 
       if (timeSelect.options.length === 1) {
@@ -931,6 +1560,11 @@
   function validateTimeSlot(date, selectedTime) {
     const dayName = new Date(date + 'T00:00:00').toLocaleDateString('en-US', { weekday: 'long' });
     const business = businessHours[dayName];
+
+    if (walkInDays.includes(dayName)) {
+      alert(`${dayName} is a walk-in only day. Appointments are on Mondays, Wednesdays, and Fridays.`);
+      return Promise.resolve(false);
+    }
 
     if (!business) {
       alert(`We are closed on ${dayName}s. Please select another day.`);
@@ -964,14 +1598,13 @@
 
         return db.collection('bookings').where('date', '==', date).get()
           .then((querySnapshot) => {
-            const newServiceDuration = getSelectedServiceDuration();
-            const newServiceEndTime = selectedMinutes + newServiceDuration;
+            const SLOT_INTERVAL = 35;
+            const newServiceEndTime = selectedMinutes + SLOT_INTERVAL;
 
             for (let doc of querySnapshot.docs) {
               let bookedTime = doc.data().time.trim().replace(/\s+/g, ' ');
               let bookedMinutes = convertToMinutes(bookedTime);
-              let bookedDuration = doc.data().duration || 30;
-              let bookedEndTime = bookedMinutes + bookedDuration;
+              let bookedEndTime = bookedMinutes + SLOT_INTERVAL;
 
               if (selectedMinutes < bookedEndTime && bookedMinutes < newServiceEndTime) return false;
             }
@@ -989,9 +1622,7 @@
 
     const user = firebase.auth().currentUser;
     if (!user) {
-      if (confirm("You must be logged in to book an appointment. Click OK to log in.")) {
-        window.location.href = 'login.html';
-      }
+      googleSignIn();
       return;
     }
 
@@ -1011,8 +1642,14 @@
       return;
     }
 
+    if (!selectedCutItem) {
+      alert('Please select your Cut of Choice before booking.');
+      return;
+    }
+
     const bookingNumber = generateBookingNumber(name);
     const duration = getSelectedServiceDuration();
+    const total = getSelectedTotal();
 
     validateTimeSlot(date, time)
       .then((isAvailable) => {
@@ -1030,6 +1667,7 @@
           time,
           service: services,
           duration,
+          total,
           deposit: "No",
           timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
@@ -1042,21 +1680,24 @@
           year: "numeric", month: "long", day: "numeric"
         });
 
-        const message = `✂️ NEW BOOKING\n\n🔢 Booking #: ${bookingNumber}\n👤 Name: ${name}\n📞 Phone: ${phone}\n📍 Date: ${formattedDate}\n⏰ Time: ${time}\n💈 Service: ${services}`;
+        const totalStr = total > 0 ? `\n💰 Total: $${total.toLocaleString()}` : '';
+        const message = `✂️ NEW BOOKING\n\n🔢 Booking #: ${bookingNumber}\n👤 Name: ${name}\n📞 Phone: ${phone}\n📍 Date: ${formattedDate}\n⏰ Time: ${time}\n💈 Service: ${services}${totalStr}`;
 
-        const telegramBotToken = "8320926833:AAHmcN6foSjjN-7WXYjs_J50J0CDZ0QwFbA";
-        const telegramChatId = "8280486738";
+        const telegramBotToken = "8646321293:AAHMEmEBJ5Ly-YGHNxsDIQnbL9rE4lUaiW8";
+        const telegramChatId = "1697949012";
 
-        return fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
+        fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ chat_id: telegramChatId, text: message, parse_mode: "HTML" })
-        });
-      })
-      .then((response) => {
-        if (!response) return;
+        }).catch(() => {}); // Telegram failure should never block confirmation
 
         document.querySelector("#bookingSection form").reset();
+        clearSelections();
+        document.getElementById('adultServiceWrap').style.display = 'none';
+        document.getElementById('teenServiceWrap').style.display = 'none';
+        document.getElementById('serviceIncludesCard').style.display = 'none';
+        document.getElementById('serviceIncludesCard').innerHTML = '';
         document.getElementById("estimateTimeMessage").innerHTML = "";
         document.getElementById("selectedTime").innerHTML = "<option value=''>Pick date & service first</option>";
         document.querySelector("#bookingModal h3").style.display = "none";
@@ -1066,9 +1707,12 @@
               <span style="font-size:38px; color:white;">✔</span>
             </div>
             <h2 style="margin:0 0 12px; font-size:22px; font-weight:bold; font-family:'Bebas Neue',cursive; letter-spacing:2px;">BOOKING CONFIRMED</h2>
-            <p style="font-size:16px; margin:0 0 12px;">Your Booking #: <strong>${bookingNumber}</strong></p>
+            <p style="font-size:16px; margin:0 0 6px;">Booking #: <strong>${bookingNumber}</strong></p>
+            <p style="font-size:14px; margin:0 0 6px; color:#555;">📅 ${formattedDate} &nbsp;|&nbsp; ⏰ ${time}</p>
+            <p style="font-size:14px; margin:0 0 12px; color:#555; text-align:left; line-height:1.5;">💈 ${services}</p>
+            ${total > 0 ? `<div style="background:#f9f4e8; border:1px solid var(--accent); border-radius:8px; padding:10px 16px; margin-bottom:14px; font-family:'Bebas Neue',cursive; letter-spacing:1.5px; font-size:18px; color:#1a1a1a;">💰 TOTAL: $${total.toLocaleString()}</div>` : ''}
             <hr style="margin:15px 0; border:0; height:1px; background:#ddd;">
-            <p style="font-size:15px; margin:10px 0;">Thanks for booking with Next Level Cuts! We'll see you soon. 💈</p>
+            <p style="font-size:15px; margin:10px 0;">Thanks for booking with Jerome Celebrity Kutt! We'll see you soon. 💈</p>
             <hr style="margin:15px 0; border:0; height:1px; background:#ddd;">
             <p style="font-size:13px; color:#555; margin:15px 0; text-align:left; line-height:1.5;">ℹ️ For online payment, tap the <b>menu icon</b> (top left) and view <b>PAYMENT INFO</b>. Use your booking number as the reference.</p>
             <button onclick="closeBookingModal()" style="margin-top:15px; padding:10px 25px; background:var(--primary); color:var(--accent); border:none; border-radius:6px; font-size:15px; cursor:pointer; font-weight:bold; font-family:'Barlow',sans-serif;">OK</button>
@@ -1089,8 +1733,8 @@
     document.getElementById('bookingModal').style.display = 'none';
   }
 
-  // ========== PAYMENT INFO ==========
-  function showPaymentInfo() {
+  // ========== PAYMENT INFO ==========    
+   function showPaymentInfo() {
     Swal.fire({
       title: "<div style='font-family:Bebas Neue,cursive;letter-spacing:2px;font-size:22px;'>BANK TRANSFER INFO</div>",
       html: `
@@ -1128,9 +1772,7 @@
 
     const user = firebase.auth().currentUser;
     if (!user) {
-      if (confirm("You must be logged in to submit a review. Click OK to log in.")) {
-        window.location.href = 'login.html';
-      }
+      googleSignIn();
       return;
     }
 
@@ -1211,7 +1853,7 @@
 
   function deleteReview(docId) {
     const user = firebase.auth().currentUser;
-    if (!user) { window.location.href = 'login.html'; return; }
+    if (!user) { googleSignIn(); return; }
     db.collection('reviews').doc(docId).get().then(doc => {
       if (!doc.exists) { alert("Review not found."); return; }
       if (doc.data().uid !== user.uid) { alert("You can only delete your own reviews."); return; }
@@ -1225,7 +1867,7 @@
   function showUserBookings() {
     const user = firebase.auth().currentUser;
     if (!user) {
-      if (confirm("Please log in to view your bookings. Click OK to log in.")) window.location.href = 'login.html';
+      googleSignIn();
       return;
     }
 
@@ -1269,15 +1911,24 @@
           let cleanService = b.service || "";
           const depositStatus = b.deposit === "Made" || b.deposit === "Yes";
 
+          const isCancelled = b.status === 'Cancelled';
           bookingsHTML += `
-            <div style="border:1px solid #ddd; border-radius:10px; padding:14px; margin-bottom:14px; background:white; box-shadow:0 2px 5px rgba(0,0,0,0.08); border-left:4px solid var(--accent);">
-              <h3 style="margin-top:0; color:var(--primary); font-size:17px; font-family:'Bebas Neue',cursive; letter-spacing:1px;">Booking #: ${b.bookingNumber || "N/A"}</h3>
-              <p style="margin:4px 0; font-size:14px;"><strong>👤 Name:</strong> ${b.name || "N/A"}</p>
-              <p style="margin:4px 0; font-size:14px;"><strong>📞 Phone:</strong> ${b.phone || "N/A"}</p>
-              <p style="margin:4px 0; font-size:14px;"><strong>📅 Date:</strong> ${bookingDate}</p>
-              <p style="margin:4px 0; font-size:14px;"><strong>⏰ Time:</strong> ${b.time || "N/A"}</p>
-              ${cleanService ? `<p style="margin:4px 0; font-size:14px;"><strong>✂ Services:</strong> ${cleanService}</p>` : ''}
-              <p style="margin:4px 0; font-size:14px;"><strong>💵 Payment:</strong> <span style="color:${depositStatus ? 'green' : 'red'}; font-weight:bold;">${depositStatus ? 'Confirmed' : 'Pending'}</span></p>
+            <div style="border:1px solid #ddd; border-radius:10px; padding:14px; margin-bottom:14px; background:${isCancelled ? '#fff5f5' : 'white'}; box-shadow:0 2px 5px rgba(0,0,0,0.08); border-left:4px solid ${isCancelled ? '#e53935' : 'var(--accent)'}; color:#000;">
+              <h3 style="margin-top:0; color:#000; font-size:17px; font-family:'Bebas Neue',cursive; letter-spacing:1px;">Booking #: ${b.bookingNumber || "N/A"}</h3>
+              <p style="margin:4px 0; font-size:14px; color:#000;"><strong>👤 Name:</strong> ${b.name || "N/A"}</p>
+              <p style="margin:4px 0; font-size:14px; color:#000;"><strong>📞 Phone:</strong> ${b.phone || "N/A"}</p>
+              <p style="margin:4px 0; font-size:14px; color:#000;"><strong>📅 Date:</strong> ${bookingDate}</p>
+              <p style="margin:4px 0; font-size:14px; color:#000;"><strong>⏰ Time:</strong> ${b.time || "N/A"}</p>
+              ${cleanService ? `<p style="margin:4px 0; font-size:14px; color:#000;"><strong>✂ Services:</strong> ${cleanService}</p>` : ''}
+              <p style="margin:4px 0; font-size:14px; color:#000;"><strong>💵 Payment:</strong> <span style="color:${depositStatus ? 'green' : 'red'}; font-weight:bold;">${depositStatus ? 'Confirmed' : 'Pending'}</span></p>
+              ${b.total ? `<p style="margin:4px 0; font-size:14px; color:#000;"><strong>💰 Total:</strong> <span style="color:#1a1a1a; font-weight:bold;">$${Number(b.total).toLocaleString()}</span></p>` : ''}
+              <p style="margin:4px 0; font-size:14px; color:#000;"><strong>📌 Status:</strong> <span style="color:${isCancelled ? '#e53935' : '#2e7d32'}; font-weight:bold;">${isCancelled ? `❌ Cancelled — <strong>BY ${b.cancelledBy === 'client' ? 'CLIENT' : 'ADMIN'}</strong>` : '✅ Active'}</span></p>
+              ${!isCancelled ? `
+              <button onclick="cancelUserBooking('${b.id}', '${b.bookingNumber || 'N/A'}')" style="margin-top:10px; width:100%; padding:10px; background:#e53935; color:white; border:none; border-radius:6px; cursor:pointer; font-family:'Barlow',sans-serif; font-weight:700; font-size:14px; letter-spacing:0.5px; transition:background 0.2s;" onmouseover="this.style.background='#c62828'" onmouseout="this.style.background='#e53935'">
+                ✕ CANCEL BOOKING
+              </button>` : `
+              <p style="margin-top:10px; text-align:center; font-size:13px; color:#e53935; font-style:italic;">This booking has been cancelled.</p>
+              `}
             </div>
           `;
         });
@@ -1298,6 +1949,79 @@
       window.bookingsUnsubscribe = null;
     }
   }
+
+  // ========== CANCEL USER BOOKING ==========
+  function cancelUserBooking(bookingId, bookingNumber) {
+    const user = firebase.auth().currentUser;
+    if (!user) { googleSignIn(); return; }
+
+    Swal.fire({
+      title: 'Cancel Booking?',
+      html: `<p style="font-family:'Barlow',sans-serif; color:#555; font-size:15px;">Are you sure you want to cancel <strong>Booking #${bookingNumber}</strong>?<br><br>This cannot be undone.</p>`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#e53935',
+      cancelButtonColor: '#888',
+      confirmButtonText: 'Yes, Cancel It',
+      cancelButtonText: 'Keep Booking',
+      reverseButtons: true
+    }).then((result) => {
+      if (!result.isConfirmed) return;
+
+      db.collection('bookings').doc(bookingId).get().then(doc => {
+        if (!doc.exists) { Swal.fire('Not Found', 'Booking could not be found.', 'error'); return; }
+        if (doc.data().uid !== user.uid) { Swal.fire('Denied', 'You can only cancel your own bookings.', 'error'); return; }
+
+        db.collection('bookings').doc(bookingId).update({ status: 'Cancelled', cancelledBy: 'client' })
+          .then(() => {
+            Swal.fire({
+              title: 'Booking Cancelled',
+              text: 'Booking #' + bookingNumber + ' has been cancelled.',
+              icon: 'success',
+              confirmButtonColor: '#C8A84B'
+            });
+          })
+          .catch(err => Swal.fire('Error', 'Failed to cancel booking: ' + err.message, 'error'));
+      }).catch(err => Swal.fire('Error', err.message, 'error'));
+    });
+  }
+
+  // ========== PAYMENT INFO ==========
+  function showPaymentInfo() {
+    document.getElementById('paymentInfoModal').style.display = 'flex';
+  }
+
+  function closePaymentInfo() {
+    document.getElementById('paymentInfoModal').style.display = 'none';
+  }
+
+  // ========== WALK-IN SLOTS DISPLAY ==========
+  function renderWalkInSlots() {
+    const container = document.getElementById('walkInSlotsDisplay');
+    if (!container) return;
+    const OPEN = 10 * 60;      // 10:00 AM in minutes
+    const CLOSE = 18 * 60;     // 6:00 PM in minutes
+    const INTERVAL = 35;
+    function fmt(m) {
+      const h = Math.floor(m / 60);
+      const min = m % 60;
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      const dh = ((h + 11) % 12 + 1);
+      return `${dh}:${min.toString().padStart(2, '0')} ${ampm}`;
+    }
+    let html = '';
+    for (let t = OPEN; t < CLOSE; t += INTERVAL) {
+      html += `<span style="background:#2b2b2b; border:1px solid rgba(200,168,75,0.4); border-radius:4px; padding:4px 10px; font-size:12px; color:var(--accent); font-weight:700; font-family:'Barlow',sans-serif;">${fmt(t)}</span>`;
+    }
+    container.innerHTML = html;
+  }
+
+  // Hook into showSection to render walk-in slots when that page opens
+  const _origShowSection = showSection;
+  showSection = function(sectionId) {
+    _origShowSection(sectionId);
+    if (sectionId === 'walkInPriceSection') renderWalkInSlots();
+  };
 
   // ========== PHONE FORMAT ==========
   document.addEventListener("DOMContentLoaded", function () {
@@ -1322,5 +2046,7 @@
   });
 
 </script>
+<!-- Footer Banner -->
+<div style="position:fixed;bottom:0;left:0;right:0;background-color:#1a1a1a;border-top:2px solid var(--accent);text-align:center;padding:5px 20px;font-family:Bebas Neue,cursive;font-size:13px;letter-spacing:2px;color:#aaa;z-index:1000;">NEED YOUR OWN WEBSITE? VISIT: <a href="https://www.webvtec.com" target="_blank" style="color:var(--accent);text-decoration:none;margin-left:6px;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--accent)'">WEBVTEC.COM</a></div>
 </body>
 </html>

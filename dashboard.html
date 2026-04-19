@@ -3,7 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PURGE CUTZ</title>
+  <title>JEROME CELEBRITY KUTT</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="https://res.cloudinary.com/dqqr9udcs/image/upload/v1776537729/JEROMECELEBRITYKUTTSLOGO_ykobkv.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://res.cloudinary.com/dqqr9udcs/image/upload/v1776537729/JEROMECELEBRITYKUTTSLOGO_ykobkv.png">
+  <link rel="shortcut icon" type="image/png" href="https://res.cloudinary.com/dqqr9udcs/image/upload/v1776537729/JEROMECELEBRITYKUTTSLOGO_ykobkv.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://res.cloudinary.com/dqqr9udcs/image/upload/v1776537729/JEROMECELEBRITYKUTTSLOGO_ykobkv.png">
 
   <!-- Firebase Scripts -->
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
@@ -360,7 +364,32 @@
 </head>
 
 <body>
-  <div class="header-bar">✂ PURGE CUTZ — ADMIN</div>
+
+  <!-- ===== CHECKING ACCESS OVERLAY ===== -->
+  <div id="accessOverlay" style="
+    position:fixed;inset:0;z-index:99999;
+    background:#1a1a1a;
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;
+    gap:24px;">
+    <div style="font-family:'Bebas Neue',cursive;font-size:42px;letter-spacing:6px;color:#C8A84B;">CHECKING ACCESS</div>
+    <div style="display:flex;gap:10px;">
+      <span style="width:12px;height:12px;border-radius:50%;background:#C8A84B;animation:dotpulse 1.2s ease-in-out infinite;display:inline-block;"></span>
+      <span style="width:12px;height:12px;border-radius:50%;background:#C8A84B;animation:dotpulse 1.2s ease-in-out 0.4s infinite;display:inline-block;"></span>
+      <span style="width:12px;height:12px;border-radius:50%;background:#C8A84B;animation:dotpulse 1.2s ease-in-out 0.8s infinite;display:inline-block;"></span>
+    </div>
+    <div id="accessStatus" style="font-family:'Barlow',sans-serif;font-size:14px;color:#888;letter-spacing:1px;">VERIFYING IDENTITY...</div>
+  </div>
+  <style>
+    @keyframes dotpulse {
+      0%,100%{opacity:0.2;transform:scale(0.8);}
+      50%{opacity:1;transform:scale(1.2);}
+    }
+    #dashboardContent{display:none;}
+  </style>
+
+  <div id="dashboardContent">
+  <div class="header-bar">JEROME CELEBRITY ✂ — ADMIN</div>
 
   <div class="top-menu">
     <button onclick="showSection('gallerySection')">✂ GALLERY</button>
@@ -391,7 +420,8 @@
     <label for="photoCategorySelect">SELECT CATEGORY</label>
     <select id="photoCategorySelect">
       <option value="FADES">FADES</option>
-      <option value="REGULAR CUTS">REGULAR CUTS</option>
+      <option value="CELEBRITY REGULAR CUTS">CELEBRITY REGULAR CUTS</option>
+      <option value="CELEBRITY PREMIUM CUTS">CELEBRITY PREMIUM CUTS</option>
       <option value="BEARD WORK">BEARD WORK</option>
       <option value="KIDS CUTS">KIDS CUTS</option>
       <option value="SKIN FADES">SKIN FADES</option>
@@ -485,12 +515,12 @@
 
   <script>
    const firebaseConfig = {
-  apiKey: "AIzaSyB1nE1lIgafauY3i2zV7F0lFeOHiUYjeWM",
-  authDomain: "purge-cutz.firebaseapp.com",
-  projectId: "purge-cutz",
-  storageBucket: "purge-cutz.firebasestorage.app",
-  messagingSenderId: "915681565699",
-  appId: "1:915681565699:web:f4e49f54bdf6e090598236"
+  apiKey: "AIzaSyD837JBOi4EdywnaPAmCS1krL9HLHy90CI",
+  authDomain: "jerome-celebrity-kutt.firebaseapp.com",
+  projectId: "jerome-celebrity-kutt",
+  storageBucket: "jerome-celebrity-kutt.firebasestorage.app",
+  messagingSenderId: "43174384691",
+  appId: "1:43174384691:web:9509d2f7a1e4393306ff46"
 };
 
     firebase.initializeApp(firebaseConfig);
@@ -573,7 +603,7 @@
         () => {
           // Upload complete — get download URL
           uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-            return db.collection('gallery').add({ url: downloadURL, category: category });
+            return db.collection('gallery').add({ url: downloadURL, category: category, sortOrder: Date.now(), uploadedAt: firebase.firestore.FieldValue.serverTimestamp() });
           }).then(() => {
             showToast('✅ Photo uploaded successfully!');
             // Reset form
@@ -596,51 +626,173 @@
       );
     }
 
-    // ========== GALLERY LOAD ==========
+    // ========== GALLERY LOAD WITH DRAG-TO-REORDER ==========
     function loadGallery() {
       const galleryContainer = document.getElementById('adminGallery');
       galleryContainer.innerHTML = '';
 
-      db.collection('gallery').onSnapshot((querySnapshot) => {
-        galleryContainer.innerHTML = '';
+      db.collection('gallery').orderBy('sortOrder', 'asc').onSnapshot((querySnapshot) => {
+        // If some docs lack sortOrder, fall back secondary sort by uploadedAt
+        let docs = [];
+        querySnapshot.forEach(doc => docs.push({ id: doc.id, ...doc.data() }));
+        docs.sort((a, b) => {
+          if (a.sortOrder !== undefined && b.sortOrder !== undefined) return a.sortOrder - b.sortOrder;
+          if (a.sortOrder !== undefined) return -1;
+          if (b.sortOrder !== undefined) return 1;
+          return 0;
+        });
 
-        if (querySnapshot.empty) {
+        galleryContainer.innerHTML = '';
+        if (docs.length === 0) {
           galleryContainer.innerHTML = '<p style="text-align:center;color:#888;margin-top:20px;">No photos in gallery yet.</p>';
           return;
         }
 
         const categories = {};
-
-        querySnapshot.forEach((doc) => {
-          const data = doc.data();
-          const imageUrl = data.url;
-          const category = data.category || 'Uncategorized';
-
+        docs.forEach(item => {
+          const category = item.category || 'Uncategorized';
           if (!categories[category]) categories[category] = [];
-          categories[category].push({ imageUrl, docId: doc.id });
+          categories[category].push({ imageUrl: item.url, docId: item.id, sortOrder: item.sortOrder });
         });
 
         for (const category in categories) {
-          galleryContainer.innerHTML += `
-            <div class="gallery-category">
-              <h3>${category}</h3>
-              <div class="gallery-wrapper">
-                <div class="gallery-grid" id="gallery-${category.replace(/\s+/g,'-')}"></div>
-              </div>
+          const catId = `gallery-${category.replace(/\s+/g,'-')}`;
+          const catDiv = document.createElement('div');
+          catDiv.className = 'gallery-category';
+          catDiv.innerHTML = `
+            <h3>${category}</h3>
+            <p style="text-align:center; font-size:12px; color:#888; margin-top:-10px; margin-bottom:10px;">Hold &amp; drag photos to reorder</p>
+            <div class="gallery-wrapper">
+              <div class="gallery-grid" id="${catId}" data-category="${category}"></div>
             </div>
           `;
+          galleryContainer.appendChild(catDiv);
 
-          const categoryContainer = document.getElementById(`gallery-${category.replace(/\s+/g,'-')}`);
-          categories[category].forEach(item => {
-            categoryContainer.innerHTML += `
-              <div>
-                <img src="${item.imageUrl}" alt="Cut">
-                <button class="remove-btn" onclick="removePhoto('${item.docId}')">✕ Remove</button>
-              </div>
+          const grid = catDiv.querySelector(`#${catId}`);
+          categories[category].forEach((item, index) => {
+            const cell = document.createElement('div');
+            cell.draggable = true;
+            cell.dataset.docId = item.docId;
+            cell.style.position = 'relative';
+            cell.style.cursor = 'grab';
+            cell.style.userSelect = 'none';
+            cell.innerHTML = `
+              <img src="${item.imageUrl}" alt="Cut" style="width:100%;height:250px;object-fit:cover;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.12); pointer-events:none;">
+              <button class="remove-btn" onclick="removePhoto('${item.docId}')">✕ Remove</button>
+              <div style="position:absolute;top:8px;left:8px;background:rgba(0,0,0,0.5);color:var(--accent);border-radius:4px;padding:3px 6px;font-size:11px;pointer-events:none;">⠿ DRAG</div>
             `;
+            grid.appendChild(cell);
           });
+
+          initDragReorder(grid);
         }
       });
+    }
+
+    // ========== DRAG & DROP REORDER ==========
+    function initDragReorder(grid) {
+      let dragSrc = null;
+
+      grid.addEventListener('dragstart', e => {
+        dragSrc = e.target.closest('[draggable]');
+        if (!dragSrc) return;
+        dragSrc.style.opacity = '0.4';
+        e.dataTransfer.effectAllowed = 'move';
+      });
+
+      grid.addEventListener('dragover', e => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        const target = e.target.closest('[draggable]');
+        if (target && target !== dragSrc) {
+          const rect = target.getBoundingClientRect();
+          const after = e.clientX > rect.left + rect.width / 2;
+          if (after) {
+            grid.insertBefore(dragSrc, target.nextSibling);
+          } else {
+            grid.insertBefore(dragSrc, target);
+          }
+        }
+      });
+
+      grid.addEventListener('dragend', e => {
+        if (dragSrc) dragSrc.style.opacity = '';
+        dragSrc = null;
+
+        // Save new order to Firestore
+        const cells = Array.from(grid.querySelectorAll('[draggable]'));
+        const batch = db.batch();
+        cells.forEach((cell, index) => {
+          const docId = cell.dataset.docId;
+          if (docId) {
+            batch.update(db.collection('gallery').doc(docId), { sortOrder: index });
+          }
+        });
+        batch.commit()
+          .then(() => showToast('✅ Photo order saved.'))
+          .catch(err => showToast('❌ Failed to save order.', false));
+      });
+
+      // Touch support (long-press drag)
+      let touchDragEl = null, touchClone = null, touchOffsetX = 0, touchOffsetY = 0, longPressTimer = null;
+
+      grid.addEventListener('touchstart', e => {
+        const cell = e.target.closest('[draggable]');
+        if (!cell) return;
+        longPressTimer = setTimeout(() => {
+          touchDragEl = cell;
+          const rect = cell.getBoundingClientRect();
+          touchOffsetX = e.touches[0].clientX - rect.left;
+          touchOffsetY = e.touches[0].clientY - rect.top;
+          touchClone = cell.cloneNode(true);
+          touchClone.style.cssText = `position:fixed;top:${rect.top}px;left:${rect.left}px;width:${rect.width}px;opacity:0.7;z-index:9999;pointer-events:none;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.4);transition:none;`;
+          document.body.appendChild(touchClone);
+          cell.style.opacity = '0.3';
+          navigator.vibrate && navigator.vibrate(50);
+        }, 400);
+      }, { passive: true });
+
+      grid.addEventListener('touchmove', e => {
+        if (longPressTimer) { clearTimeout(longPressTimer); longPressTimer = null; }
+        if (!touchDragEl) return;
+        e.preventDefault();
+        const touch = e.touches[0];
+        touchClone.style.top = (touch.clientY - touchOffsetY) + 'px';
+        touchClone.style.left = (touch.clientX - touchOffsetX) + 'px';
+        // Find element underneath
+        touchClone.style.display = 'none';
+        const el = document.elementFromPoint(touch.clientX, touch.clientY);
+        touchClone.style.display = '';
+        const target = el && el.closest('[draggable]');
+        if (target && target !== touchDragEl && target.parentElement === grid) {
+          const rect = target.getBoundingClientRect();
+          const after = touch.clientX > rect.left + rect.width / 2;
+          if (after) grid.insertBefore(touchDragEl, target.nextSibling);
+          else grid.insertBefore(touchDragEl, target);
+        }
+      }, { passive: false });
+
+      const endTouch = () => {
+        if (longPressTimer) { clearTimeout(longPressTimer); longPressTimer = null; }
+        if (!touchDragEl) return;
+        touchDragEl.style.opacity = '';
+        touchClone && touchClone.remove();
+        touchClone = null;
+        // Save order
+        const cells = Array.from(grid.querySelectorAll('[draggable]'));
+        const batch = db.batch();
+        cells.forEach((cell, index) => {
+          const docId = cell.dataset.docId;
+          if (docId) batch.update(db.collection('gallery').doc(docId), { sortOrder: index });
+        });
+        batch.commit()
+          .then(() => showToast('✅ Photo order saved.'))
+          .catch(() => showToast('❌ Failed to save order.', false));
+        touchDragEl = null;
+      };
+
+      grid.addEventListener('touchend', endTouch, { passive: true });
+      grid.addEventListener('touchcancel', endTouch, { passive: true });
     }
 
     function removePhoto(docId) {
@@ -693,27 +845,34 @@
           if (!list.length) return;
           reservationsContainer.innerHTML += `<div class="reservation-group">${title}</div>`;
           list.forEach(booking => {
+            const isCancelled = booking.status === 'Cancelled';
             reservationsContainer.innerHTML += `
-              <div class="reservation-card" data-id="${booking.id}">
+              <div class="reservation-card" data-id="${booking.id}" style="${isCancelled ? 'opacity:0.7; border-left:4px solid #e53935;' : ''}">
                 <div class="reservation-header">
                   <h3>${booking.name}</h3>
-                  <span class="badge ${badgeClass}">${title}</span>
+                  <div style="display:flex; gap:6px; align-items:center;">
+                    ${isCancelled ? `<span class="badge" style="background:#e53935;">CANCELLED BY ${(booking.cancelledBy === 'client' ? 'CLIENT' : 'ADMIN')}</span>` : `<span class="badge ${badgeClass}">${title}</span>`}
+                  </div>
                 </div>
                 <p style="font-size:14px; margin:4px 0;"><strong>Booking #:</strong> ${booking.bookingNumber || "N/A"}</p>
                 <p style="font-size:14px; margin:4px 0;"><strong>Phone:</strong> ${booking.phone}</p>
                 <p style="font-size:14px; margin:4px 0;"><strong>Date:</strong> ${booking.date}</p>
                 <p style="font-size:14px; margin:4px 0;"><strong>Time:</strong> ${booking.time}</p>
                 <p style="font-size:14px; margin:4px 0;"><strong>Service:</strong> ${booking.service}</p>
+                ${booking.total ? `<p style="font-size:14px; margin:4px 0;"><strong>💰 Total Cost:</strong> <span style="color:#1a7a1a; font-weight:700; font-size:15px;">$${Number(booking.total).toLocaleString()}</span></p>` : ''}
                 <p style="font-size:14px; margin:4px 0;"><strong>💵 Payment:</strong> ${booking.deposit || "No"}</p>
                 <p style="font-size:14px; margin:4px 0;"><strong>Status:</strong>
-                  <span class="${booking.status === 'Completed' ? 'status-completed' : booking.status === 'Not Completed' ? 'status-not' : 'status-none'}">
-                    ${booking.status || "Not Set"}
+                  <span class="${booking.status === 'Completed' ? 'status-completed' : booking.status === 'Cancelled' ? 'status-not' : booking.status === 'Not Completed' ? 'status-not' : 'status-none'}">
+                    ${booking.status || "Not Set"}${booking.status === 'Cancelled' ? ` — <strong>CANCELLED BY ${(booking.cancelledBy === 'client' ? 'CLIENT' : 'ADMIN')}</strong>` : ''}
                   </span>
                 </p>
                 <div class="action-buttons">
-                  <button class="cancel-btn" onclick="cancelReservation('${booking.id}')">Cancel</button>
+                  ${!isCancelled
+                    ? `<button class="cancel-btn" onclick="cancelReservation('${booking.id}')">✕ Cancel</button>`
+                    : `<button class="cancel-btn" disabled style="opacity:0.4; cursor:not-allowed;">✕ Cancelled</button>`
+                  }
                   <button class="deposit-btn" onclick="updateDeposit('${booking.id}')">Payment</button>
-                  ${title === "Today" ? `<button class="status-btn" onclick="updateStatus('${booking.id}')">Status</button>` : ""}
+                  ${title === "Today" && !isCancelled ? `<button class="status-btn" onclick="updateStatus('${booking.id}')">Status</button>` : ""}
                 </div>
               </div>
             `;
@@ -784,10 +943,21 @@
     }
 
     function cancelReservation(orderId) {
-      if (!confirm("Are you sure you want to cancel this booking?")) return;
-      db.collection("bookings").doc(orderId).delete()
-        .then(() => showToast('🗑 Reservation cancelled.'))
-        .catch(err => alert("Failed to cancel: " + err.message));
+      document.getElementById('adminCancelBookingId').value = orderId;
+      document.getElementById('adminCancelModal').style.display = 'flex';
+    }
+
+    function confirmAdminCancel() {
+      const orderId = document.getElementById('adminCancelBookingId').value;
+      if (!orderId) return;
+      db.collection("bookings").doc(orderId).update({ status: 'Cancelled', cancelledBy: 'admin' })
+        .then(() => { closeAdminCancelModal(); showToast('🗑 Booking cancelled.'); })
+        .catch(err => { closeAdminCancelModal(); alert("Failed to cancel: " + err.message); });
+    }
+
+    function closeAdminCancelModal() {
+      document.getElementById('adminCancelModal').style.display = 'none';
+      document.getElementById('adminCancelBookingId').value = '';
     }
 
     // ========== DEPOSIT ==========
@@ -963,31 +1133,62 @@
     }
 
     // ========== ADMIN UID GUARD ==========
-    // Must match the same UID in index.html
-    const ADMIN_UID = "gXItXsQ7OpY2jqvfJMwxZIg0ntx1";
+    const ADMIN_UID = "nIwRfcHc7Of6ahl0Qj0M2QWtPTc2";
 
-    // ========== AUTH GUARD ==========
+    // ========== AUTH GUARD WITH OVERLAY ==========
     firebase.auth().onAuthStateChanged(user => {
+      const overlay = document.getElementById('accessOverlay');
+      const status  = document.getElementById('accessStatus');
+      const content = document.getElementById('dashboardContent');
+
       if (!user) {
-        // Not signed in at all — back to index
-        window.location.href = 'index.html';
+        status.textContent = 'ACCESS DENIED — REDIRECTING...';
+        status.style.color = '#e53935';
+        setTimeout(() => { window.location.href = 'index.html'; }, 1200);
         return;
       }
 
       if (user.uid !== ADMIN_UID) {
-        // Signed in but NOT the authorised admin — sign out and redirect
+        status.textContent = 'UNAUTHORISED — SIGNING OUT...';
+        status.style.color = '#e53935';
         firebase.auth().signOut().then(() => {
-          window.location.href = 'index.html';
+          setTimeout(() => { window.location.href = 'index.html'; }, 1200);
         });
         return;
       }
 
-      // ✅ Verified admin — load dashboard
+      // Verified admin — reveal dashboard
+      status.textContent = 'ACCESS GRANTED';
+      status.style.color = '#4CAF50';
+      setTimeout(() => {
+        overlay.style.transition = 'opacity 0.4s';
+        overlay.style.opacity = '0';
+        setTimeout(() => {
+          overlay.style.display = 'none';
+          content.style.display = 'block';
+        }, 400);
+      }, 600);
+
       loadGallery();
       showSection('reservationsPage');
       loadReservations();
       loadUnavailableDates();
     });
   </script>
+  <!-- Admin Cancel Booking Modal -->
+  <div id="adminCancelModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.55); justify-content:center; align-items:center; z-index:2000;">
+    <div style="background:#fff; padding:28px 24px; border-radius:14px; max-width:320px; width:90%; text-align:center; box-shadow:0 8px 30px rgba(0,0,0,0.25); border-top:4px solid #e53935;">
+      <input type="hidden" id="adminCancelBookingId"/>
+      <div style="font-size:40px; margin-bottom:10px;">⚠️</div>
+      <h3 style="margin:0 0 8px; font-family:'Bebas Neue',cursive; letter-spacing:2px; color:#1a1a1a; font-size:22px;">CANCEL BOOKING?</h3>
+      <p style="font-size:14px; color:#666; margin:0 0 22px; font-family:'Barlow',sans-serif; line-height:1.5;">This will mark the booking as <strong style="color:#e53935;">Cancelled</strong>. The client will still appear in the list with a cancelled status.</p>
+      <div style="display:flex; gap:10px; justify-content:center;">
+        <button onclick="closeAdminCancelModal()" style="flex:1; background:#eee; color:#333; border:none; padding:11px 16px; border-radius:6px; cursor:pointer; font-family:'Barlow',sans-serif; font-weight:700; margin-bottom:0; font-size:14px;">Keep</button>
+        <button onclick="confirmAdminCancel()" style="flex:1; background:#e53935; color:white; border:none; padding:11px 16px; border-radius:6px; cursor:pointer; font-family:'Barlow',sans-serif; font-weight:700; margin-bottom:0; font-size:14px;">Yes, Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  </div><!-- end #dashboardContent -->
 </body>
 </html>
