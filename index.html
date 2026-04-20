@@ -1867,19 +1867,16 @@
 
   // ========== MY BOOKINGS ==========
   function showUserBookings() {
+    const user = firebase.auth().currentUser;
+    if (!user) {
+      googleSignIn();
+      return;
+    }
+
     document.getElementById('bookingModal').style.display = 'none';
     document.getElementById('adminLoginModal').style.display = 'none';
     document.getElementById('myBookingsContent').innerHTML = '<p style="text-align:center; color:#888;">Loading your bookings...</p>';
     document.getElementById('myBookingsModal').style.display = 'flex';
-
-    // Wait for auth state to resolve before querying — avoids "Missing or insufficient permissions"
-    const authUnsub = firebase.auth().onAuthStateChanged(user => {
-      authUnsub(); // Only listen once
-      if (!user) {
-        document.getElementById('myBookingsModal').style.display = 'none';
-        googleSignIn();
-        return;
-      }
 
     const unsubscribe = db.collection('bookings').where("uid", "==", user.uid).onSnapshot(snapshot => {
       let bookings = [];
@@ -1944,8 +1941,7 @@
       document.getElementById('myBookingsContent').innerHTML = `<div style="text-align:center; padding:20px;"><p style="color:red;">Error loading bookings.</p><button onclick="closeMyBookings();" style="background:#ccc; color:#333; padding:8px 16px; border:none; border-radius:6px; cursor:pointer;">Close</button></div>`;
     });
 
-      window.bookingsUnsubscribe = unsubscribe;
-    }); // end onAuthStateChanged
+    window.bookingsUnsubscribe = unsubscribe;
   }
 
   function closeMyBookings() {
@@ -1974,17 +1970,21 @@
     }).then((result) => {
       if (!result.isConfirmed) return;
 
-      // Directly update — Firestore rules enforce that only the owner can update status/cancelledBy
-      db.collection('bookings').doc(bookingId).update({ status: 'Cancelled', cancelledBy: 'client' })
-        .then(() => {
-          Swal.fire({
-            title: 'Booking Cancelled',
-            text: 'Booking #' + bookingNumber + ' has been cancelled.',
-            icon: 'success',
-            confirmButtonColor: '#1565C0'
-          });
-        })
-        .catch(err => Swal.fire('Error', 'Failed to cancel booking: ' + err.message, 'error'));
+      db.collection('bookings').doc(bookingId).get().then(doc => {
+        if (!doc.exists) { Swal.fire('Not Found', 'Booking could not be found.', 'error'); return; }
+        if (doc.data().uid !== user.uid) { Swal.fire('Denied', 'You can only cancel your own bookings.', 'error'); return; }
+
+        db.collection('bookings').doc(bookingId).update({ status: 'Cancelled', cancelledBy: 'client' })
+          .then(() => {
+            Swal.fire({
+              title: 'Booking Cancelled',
+              text: 'Booking #' + bookingNumber + ' has been cancelled.',
+              icon: 'success',
+              confirmButtonColor: '#1565C0'
+            });
+          })
+          .catch(err => Swal.fire('Error', 'Failed to cancel booking: ' + err.message, 'error'));
+      }).catch(err => Swal.fire('Error', err.message, 'error'));
     });
   }
 
