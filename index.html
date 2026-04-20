@@ -71,8 +71,8 @@
 <style>
   :root {
     --primary: #1a1a1a;
-    --accent: #C8A84B;
-    --accent2: #8B6914;
+    --accent: #1565C0;
+    --accent2: #0D47A1;
     --bg: #2b2b2b;
     --white: #ffffff;
     --text: #f0f0f0;
@@ -211,7 +211,7 @@
   form input:focus, form select:focus {
     outline: none;
     border-color: var(--accent);
-    box-shadow: 0 0 0 2px rgba(200,168,75,0.2);
+    box-shadow: 0 0 0 2px rgba(21,101,192,0.2);
   }
 
   form button {
@@ -327,8 +327,8 @@
   .opening-hours {
     font-family: 'Barlow', sans-serif;
     padding: 8px 0;
-    border-top: 1px solid rgba(200,168,75,0.3);
-    border-bottom: 1px solid rgba(200,168,75,0.3);
+    border-top: 1px solid rgba(21,101,192,0.3);
+    border-bottom: 1px solid rgba(21,101,192,0.3);
   }
 
   .opening-hours h3 {
@@ -366,7 +366,7 @@
 
   .separator-line {
     height: 1px;
-    background-color: rgba(200,168,75,0.3);
+    background-color: rgba(21,101,192,0.3);
     margin: 8px 0;
   }
 
@@ -671,7 +671,7 @@
   <div style="max-width:420px; margin:0 auto; padding:0 16px 80px;">
 
     <!-- Single Walk-In Price List Card -->
-    <div style="background:#1a1a1a; border-radius:10px; overflow:hidden; margin-bottom:16px; border:1px solid rgba(200,168,75,0.3);">
+    <div style="background:#1a1a1a; border-radius:10px; overflow:hidden; margin-bottom:16px; border:1px solid rgba(21,101,192,0.3);">
       <div style="background:var(--accent); padding:10px 16px;">
         <span style="font-family:'Bebas Neue',cursive; letter-spacing:2px; font-size:15px; color:#1a1a1a;">💈 WALK IN PRICE LIST</span>
       </div>
@@ -1087,7 +1087,7 @@
     } else {
       summaryBox.style.display = 'block';
       const total = getSelectedTotal();
-      const totalStr = total > 0 ? `<div style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(200,168,75,0.3);font-family:'Bebas Neue',cursive;letter-spacing:1px;font-size:15px;color:var(--accent);">💰 ESTIMATED TOTAL: $${total.toLocaleString()}</div>` : '';
+      const totalStr = total > 0 ? `<div style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(21,101,192,0.3);font-family:'Bebas Neue',cursive;letter-spacing:1px;font-size:15px;color:var(--accent);">💰 ESTIMATED TOTAL: $${total.toLocaleString()}</div>` : '';
       summaryText.innerHTML = parts.map(p => `<span style="display:inline-block;background:#2a2a2a;border:1px solid var(--accent);border-radius:4px;padding:3px 8px;margin:3px 3px 3px 0;font-size:12px;color:var(--accent);font-weight:700;">${p}</span>`).join('') + totalStr;
     }
   }
@@ -1116,7 +1116,7 @@
     s.textContent = `
       .cut-item, .addon-item {
         padding: 8px 10px;
-        border-bottom: 1px solid rgba(200,168,75,0.12);
+        border-bottom: 1px solid rgba(21,101,192,0.12);
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -1126,9 +1126,9 @@
         user-select: none;
         -webkit-tap-highlight-color: transparent;
       }
-      .cut-item:hover, .addon-item:hover { background: rgba(200,168,75,0.08); }
-      .cut-item.selected { background: rgba(200,168,75,0.18); border-left: 3px solid var(--accent); }
-      .addon-item.selected { background: rgba(200,168,75,0.14); border-left: 3px solid #e0c060; }
+      .cut-item:hover, .addon-item:hover { background: rgba(21,101,192,0.08); }
+      .cut-item.selected { background: rgba(21,101,192,0.18); border-left: 3px solid var(--accent); }
+      .addon-item.selected { background: rgba(21,101,192,0.14); border-left: 3px solid #e0c060; }
       .item-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; display:inline-block; }
       .item-label { display:flex; align-items:center; gap:8px; font-size:13px; color:#ddd; font-family:'Barlow',sans-serif; }
       .item-price { font-size:12px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:8px; }
@@ -1752,7 +1752,7 @@
       confirmButtonText: "CLOSE",
       background: "#1a1a1a",
       color: "white",
-      confirmButtonColor: "#C8A84B",
+      confirmButtonColor: "#1565C0",
       customClass: { popup: "swal2-rounded" }
     });
   }
@@ -1980,7 +1980,7 @@
               title: 'Booking Cancelled',
               text: 'Booking #' + bookingNumber + ' has been cancelled.',
               icon: 'success',
-              confirmButtonColor: '#C8A84B'
+              confirmButtonColor: '#1565C0'
             });
           })
           .catch(err => Swal.fire('Error', 'Failed to cancel booking: ' + err.message, 'error'));
@@ -2013,7 +2013,7 @@
     }
     let html = '';
     for (let t = OPEN; t < CLOSE; t += INTERVAL) {
-      html += `<span style="background:#2b2b2b; border:1px solid rgba(200,168,75,0.4); border-radius:4px; padding:4px 10px; font-size:12px; color:var(--accent); font-weight:700; font-family:'Barlow',sans-serif;">${fmt(t)}</span>`;
+      html += `<span style="background:#2b2b2b; border:1px solid rgba(21,101,192,0.4); border-radius:4px; padding:4px 10px; font-size:12px; color:var(--accent); font-weight:700; font-family:'Barlow',sans-serif;">${fmt(t)}</span>`;
     }
     container.innerHTML = html;
   }
